@@ -11,6 +11,8 @@ var refresh_rate : float;
 var time : float;
 
 var previous : Song;
+var dump_song : bool;
+var dump_format : String;
 
 var ui_bar : BetterProgressBar;
 var ui_icon : TextureRect;
@@ -37,6 +39,7 @@ func _root_ready(root):
 		add_child(node);
 
 func _update_api():
+	_update_dump();
 	_update_audio();
 	var updated = Settings.get_default("DataApi", "VLC");
 	if selected == updated:
@@ -53,6 +56,12 @@ func _update_api():
 	node.enable();
 	node._update_api();
 	
+func _update_dump():
+	dump_song = Settings.get_default("DumpEnabled", false);
+	dump_format = Settings.get_default("DumpFormat", "$artist - $title")
+	if dump_song and previous != null:
+		_dump_to_file();
+		
 func _update_audio():
 	var device = Settings.get_default("DataAudio", "Default");
 	if AudioServer.capture_get_device() == device:
@@ -94,6 +103,15 @@ func _update_interface(song):
 	ui_artist.text = song.artist;
 	if previous == null or song.title != previous.title or song.playing:
 		previous = song;
+		if dump_song:
+			_dump_to_file();
+			
+func _dump_to_file():
+	var file = File.new();
+	file.open("song.txt", File.WRITE);
+	file.store_string(dump_format.replace("$artist", previous.artist).replace("$title", previous.title))
+	file.flush();
+	file.close();
 		
 func resize_if_needed(image : Image) -> Image:
 	var width = image.get_width();

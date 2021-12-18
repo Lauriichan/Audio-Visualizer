@@ -140,6 +140,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+value = 1.0
 
 [node name="AudioSpectrum" type="Control" parent="Body"]
 margin_left = 320.0

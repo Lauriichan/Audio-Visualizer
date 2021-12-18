@@ -66,8 +66,7 @@ func read_next(song, key):
 			data.erase(0, 8);
 			song.image_data = data.http_unescape();
 		"filename":
-			if song.title.empty():
-				skip_to_node("filename");
+			if song.title.empty() or song.title == "Unknown Title":
 				var data = parser.get_node_data();
 				song.title = data;
 				if data.find(".") != -1:
