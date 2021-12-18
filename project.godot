@@ -40,11 +40,6 @@ _global_script_classes=[ {
 "path": "res://Assets/Script/Api/SongStruct.gd"
 }, {
 "base": "BaseApi",
-"class": "Spotify",
-"language": "GDScript",
-"path": "res://Assets/Script/Api/Spotify.gd"
-}, {
-"base": "BaseApi",
 "class": "VLC",
 "language": "GDScript",
 "path": "res://Assets/Script/Api/VLC.gd"
@@ -56,16 +51,19 @@ _global_script_class_icons={
 "BetterProgressBar": "",
 "DropdownButton": "",
 "Song": "",
-"Spotify": "",
 "VLC": ""
 }
 
 [application]
 
-config/name="AudioPlayer"
+config/name="Audio Visualizer"
 run/main_scene="res://Scene.tscn"
+run/low_processor_mode=true
+boot_splash/image="res://boot.png"
 boot_splash/use_filter=false
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 config/auto_accept_quit=false
 
 [audio]

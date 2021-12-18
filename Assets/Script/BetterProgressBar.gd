@@ -8,6 +8,10 @@ export var value : float = 0.0 setget set_value;
 
 var difference : float = 1.0;
 var progress : float = 0.0;
+var prev_progress : float = 0.0;
+
+var target = 0.0;
+var smoothing = false;
 
 var actual_theme : Theme;
 
@@ -61,9 +65,19 @@ func _draw():
 func _process(_delta):
 	if Engine.editor_hint:
 		update_bar();
-	update();
+	if prev_progress != progress:
+		prev_progress = progress;
+		update();
 	
 func _physics_process(_delta):
+	if smoothing:
+		if target >= value:
+			value = lerp(value, target, _delta);
+		else:
+			if value < 0.999:
+				value = lerp(value, 1, _delta * 4);
+			else:
+				value = target;
 	update_bar();
 	
 func update_bar():

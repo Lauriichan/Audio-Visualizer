@@ -20,8 +20,8 @@ func disable():
 func is_enabled() -> bool:
 	return enabled;
 	
-func _update():
-	pass
+func _update() -> Song:
+	return null;
 	
 func _update_api():
 	pass

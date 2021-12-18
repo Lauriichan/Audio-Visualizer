@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<root>
+
+  <fullscreen>false</fullscreen>
+  <stats>
+    <inputbitrate>0.12159742414951</inputbitrate>
+    <demuxdiscontinuity>0</demuxdiscontinuity>
+    <lostabuffers>0</lostabuffers>
+    <demuxreadbytes>66240</demuxreadbytes>
+    <demuxbitrate>0.049542624503374</demuxbitrate>
+    <latepictures>0</latepictures>
+    <playedabuffers>113</playedabuffers>
+    <decodedaudio>113</decodedaudio>
+    <readpackets>15</readpackets>
+    <demuxreadpackets>256</demuxreadpackets>
+    <decodedvideo>0</decodedvideo>
+    <displayedpictures>0</displayedpictures>
+    <readbytes>144384</readbytes>
+    <demuxcorrupted>0</demuxcorrupted>
+    <lostpictures>0</lostpictures>
+  </stats>
+  <aspectratio>default</aspectratio>
+  <audiodelay>0</audiodelay>
+  <apiversion>4</apiversion>
+  <currentplid>0</currentplid>
+  <time>85.665221</time>
+  <volume>84</volume>
+  <length>144</length>
+  <random>true</random>
+  <audiofilters>
+    <filter_0></filter_0>
+  </audiofilters>
+  <rate>1</rate>
+  <videoeffects>
+    <hue>0</hue>
+    <saturation>1</saturation>
+    <contrast>1</contrast>
+    <brightness>1</brightness>
+    <gamma>1</gamma>
+  </videoeffects>
+  <state>paused</state>
+  <loop>false</loop>
+  <version>4.0.0-dev Otto Chriek</version>
+  <position>0.59418213367462</position>
+  <repeat>true</repeat>
+  <subtitledelay>0</subtitledelay>
+  <equalizer></equalizer>
+  <information>
+
+    <chapter>0</chapter>
+    <title>0</title>
+    <category>
+      <meta>
+        <title>the blue one</title>
+        <artwork_url>file:///C:/Users/laura/AppData/Roaming/vlc/art/arturl/8c4211f734bebc305c27615ea075a903/art.jpg</artwork_url>
+        <artist>heiakim</artist>
+        <filename>the blue one.mp3</filename>
+      </meta>
+      <element name="Stream &#39;audio/0&#39;">
+        <Bitrate>192 kb/s</Bitrate>
+        <Codec>MPEG Audio layer 1/2 (mpga)</Codec>
+        <Title>Track 0</Title>
+        <Channels>Stereo</Channels>
+        <Type>Audio</Type>
+        <Sample_rate>48000 Hz</Sample_rate>
+        <Decoded_format>32 bits float LE (f32l)</Decoded_format>
+        <Decoded_bits_per_sample>32</Decoded_bits_per_sample>
+      </element>
+    </category>
+    <titles_count>0</titles_count>
+    <chapters_count>0</chapters_count>
+    <category name="meta">
+      <info name='title'>the blue one</info>
+      <info name='artwork_url'>file:///C:/Users/laura/AppData/Roaming/vlc/art/arturl/8c4211f734bebc305c27615ea075a903/art.jpg</info>
+      <info name='artist'>heiakim</info>
+      <info name='filename'>the blue one.mp3</info>
+    </category>
+    <category name='Stream &#39;audio/0&#39;'>
+      <info name='Decoded bits per sample'>32</info>
+      <info name='Codec'>MPEG Audio layer 1/2 (mpga)</info>
+      <info name='Title'>Track 0</info>
+      <info name='Channels'>Stereo</info>
+      <info name='Bitrate'>192 kb/s</info>
+      <info name='Decoded format'>32 bits float LE (f32l)</info>
+      <info name='Sample rate'>48000 Hz</info>
+      <info name='Type'>Audio</info>
+    </category>
+  </information>
+</root>

@@ -23,8 +23,10 @@ func get_data_path() -> String:
 	return path.replace("user://", OS.get_user_data_dir() + '/');
 
 func _load_data():
+	Settings.clear();
 	var file = File.new();
 	if not file.file_exists(path):
+		_setup_data();
 		return;
 	file.open(path, File.READ);
 	var content = file.get_as_text();
@@ -37,9 +39,11 @@ func _load_data():
 	if not result is Dictionary:
 		_setup_data();
 		return;
-	Settings.clear();
 	for key in result.keys():
 		if not result[key]:
+			continue;
+		if key.ends_with("Color"):
+			Settings.set(key, Color(result[key]));
 			continue;
 		Settings.set(key, result[key]);
 	_setup_data();
