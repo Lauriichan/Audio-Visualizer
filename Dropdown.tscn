@@ -1,0 +1,303 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Style/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Script/Dropdown/DropdownButton.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Script/Dropdown/Dropdown.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Script/Dropdown/AudioDropdownButton.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Script/Dropdown/ActionButton.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="Dropdown" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -996.0
+margin_bottom = -142.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+defaults = {
+"AccentColor": Color( 0.717647, 0.121569, 0.470588, 1 ),
+"BackgroundColor": Color( 0.203922, 0.203922, 0.203922, 1 ),
+"BarBackgroundColor": Color( 0.380392, 0.380392, 0.380392, 1 ),
+"BarBorderColor": Color( 0.27451, 0.27451, 0.27451, 1 ),
+"DataApi": "VLC",
+"DataAudio": "Default",
+"Debug": false,
+"DumpEnabled": false,
+"DumpFormat": "$artist - $title",
+"TextColor": Color( 1, 1, 1, 1 )
+}
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_right = 304.0
+margin_bottom = 204.0
+theme = ExtResource( 1 )
+color = Color( 0.231373, 0.227451, 0.227451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 302.0
+margin_bottom = 202.0
+theme = ExtResource( 1 )
+color = Color( 0.27451, 0.27451, 0.27451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 302.0
+margin_bottom = 202.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 296.0
+margin_bottom = 642.0
+rect_min_size = Vector2( 296, 250 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DataApi" type="MenuButton" parent="ScrollContainer/VBoxContainer"]
+margin_right = 296.0
+margin_bottom = 16.0
+text = "Api"
+align = 0
+switch_on_hover = true
+script = ExtResource( 2 )
+itemList = [ "VLC", "Spotify" ]
+selected = "VLC"
+
+[node name="DataAudio" type="MenuButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 20.0
+margin_right = 296.0
+margin_bottom = 36.0
+focus_mode = 2
+text = "Audio Device"
+align = 0
+switch_on_hover = true
+script = ExtResource( 4 )
+selected = "Default"
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 296.0
+margin_bottom = 44.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 296.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Background"
+
+[node name="BackgroundColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 68.0
+margin_right = 296.0
+margin_bottom = 84.0
+rect_pivot_offset = Vector2( -95, -30 )
+
+[node name="Label6" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 88.0
+margin_right = 296.0
+margin_bottom = 104.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Bar Background"
+
+[node name="BarBackgroundColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 108.0
+margin_right = 296.0
+margin_bottom = 124.0
+rect_pivot_offset = Vector2( -95, -30 )
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 128.0
+margin_right = 296.0
+margin_bottom = 144.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Bar Border"
+
+[node name="BarBorderColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 148.0
+margin_right = 296.0
+margin_bottom = 164.0
+rect_pivot_offset = Vector2( -95, -30 )
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 296.0
+margin_bottom = 184.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Text"
+
+[node name="TextColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 188.0
+margin_right = 296.0
+margin_bottom = 204.0
+rect_pivot_offset = Vector2( -95, -30 )
+
+[node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 208.0
+margin_right = 296.0
+margin_bottom = 224.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Accent"
+
+[node name="AccentColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 228.0
+margin_right = 296.0
+margin_bottom = 244.0
+rect_pivot_offset = Vector2( -95, -30 )
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 248.0
+margin_right = 296.0
+margin_bottom = 252.0
+
+[node name="DumpEnabled" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 256.0
+margin_right = 296.0
+margin_bottom = 272.0
+text = "Dump Song"
+
+[node name="HSeparator5" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 276.0
+margin_right = 296.0
+margin_bottom = 280.0
+custom_styles/separator = SubResource( 2 )
+
+[node name="Label5" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 284.0
+margin_right = 296.0
+margin_bottom = 300.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Format"
+
+[node name="DumpFormat" type="LineEdit" parent="ScrollContainer/VBoxContainer"]
+margin_top = 304.0
+margin_right = 296.0
+margin_bottom = 330.0
+text = "$artist - $title"
+clear_button_enabled = true
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 334.0
+margin_right = 296.0
+margin_bottom = 338.0
+
+[node name="Label7" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 342.0
+margin_right = 296.0
+margin_bottom = 358.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Spotify Port"
+
+[node name="SpotifyPort" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 362.0
+margin_right = 296.0
+margin_bottom = 388.0
+min_value = 1.0
+max_value = 65535.0
+value = 80.0
+
+[node name="HSeparator7" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 392.0
+margin_right = 296.0
+margin_bottom = 396.0
+
+[node name="Label8" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 400.0
+margin_right = 296.0
+margin_bottom = 416.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  VLC Password"
+
+[node name="VlcPassword" type="LineEdit" parent="ScrollContainer/VBoxContainer"]
+margin_top = 420.0
+margin_right = 296.0
+margin_bottom = 446.0
+text = "$artist - $title"
+clear_button_enabled = true
+
+[node name="Label9" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 450.0
+margin_right = 296.0
+margin_bottom = 466.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  VLC Port"
+
+[node name="VlcPort" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 470.0
+margin_right = 296.0
+margin_bottom = 496.0
+min_value = 1.0
+max_value = 65535.0
+value = 8080.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label10" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 500.0
+margin_right = 296.0
+margin_bottom = 516.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  VLC Host"
+
+[node name="VlcHost" type="LineEdit" parent="ScrollContainer/VBoxContainer"]
+margin_top = 520.0
+margin_right = 296.0
+margin_bottom = 546.0
+text = "127.0.0.1"
+clear_button_enabled = true
+
+[node name="HSeparator6" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 550.0
+margin_right = 296.0
+margin_bottom = 554.0
+
+[node name="Debug" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 558.0
+margin_right = 296.0
+margin_bottom = 574.0
+text = "Debug"
+
+[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 578.0
+margin_right = 296.0
+margin_bottom = 582.0
+
+[node name="OpenConfigButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+margin_top = 586.0
+margin_right = 296.0
+margin_bottom = 602.0
+text = "Open Config"
+script = ExtResource( 5 )
+action = "var _ignore = OS.shell_open(\"file://\" + get_node(\"../../../../\").get_data_path());"
+
+[node name="ReloadConfigButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+margin_top = 606.0
+margin_right = 296.0
+margin_bottom = 622.0
+text = "Reload Config"
+script = ExtResource( 5 )
+action = "get_node(\"../../../../\")._load_data();"
+
+[node name="ExitButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+margin_top = 626.0
+margin_right = 296.0
+margin_bottom = 642.0
+text = "Exit"
+script = ExtResource( 5 )
+action = "get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)"
