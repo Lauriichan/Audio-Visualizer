@@ -31,10 +31,13 @@ func _load_data():
 	file.close();
 	var parseResult = JSON.parse(content);
 	if parseResult.error_line == -1:
+		_setup_data();
 		return;
 	var result = parseResult.result;
 	if not result is Dictionary:
+		_setup_data();
 		return;
+	Settings.clear();
 	for key in result.keys():
 		if not result[key]:
 			continue;
@@ -75,9 +78,16 @@ func _save_data():
 	_read_data();
 	_apply_data();
 	emit_signal("update_settings");
+	var dict = {};
+	for key in Settings.data.keys():
+		var value = Settings.get(key);
+		if value is Color:
+			dict[key] = Color(value).to_html(false);
+			continue;
+		dict[key] = value;
 	var file = File.new();
 	file.open(path, File.WRITE);
-	file.store_string(JSON.print(Settings.data));
+	file.store_string(JSON.print(dict));
 	file.flush();
 	file.close();
 	
@@ -121,7 +131,8 @@ func _apply_data(): # Apply data to Theme
 		"../Body/ColorRect2": "color"
 	});
 	node_color("AccentColor", {
-		"../Bar/ColorRect": "color"
+		"../Bar/ColorRect": "color",
+		"../Body/AudioSpectrum": "BarColor"
 	});
 	
 func color(key, items):

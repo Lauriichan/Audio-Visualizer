@@ -28,7 +28,11 @@ defaults = {
 "Debug": false,
 "DumpEnabled": false,
 "DumpFormat": "$artist - $title",
-"TextColor": Color( 1, 1, 1, 1 )
+"SpotifyPort": 80,
+"TextColor": Color( 1, 1, 1, 1 ),
+"VlcHost": "127.0.0.1",
+"VlcPassword": "Password",
+"VlcPort": 8080
 }
 
 [node name="ColorRect2" type="ColorRect" parent="."]
@@ -227,7 +231,7 @@ text = "  VLC Password"
 margin_top = 420.0
 margin_right = 296.0
 margin_bottom = 446.0
-text = "$artist - $title"
+text = "Password"
 clear_button_enabled = true
 
 [node name="Label9" type="Label" parent="ScrollContainer/VBoxContainer"]

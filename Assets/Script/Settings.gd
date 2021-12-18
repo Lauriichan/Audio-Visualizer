@@ -18,3 +18,6 @@ func set(path, value):
 
 func remove(path):
 	var _ignore = data.erase(path);
+	
+func clear():
+	data.clear();

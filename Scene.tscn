@@ -167,5 +167,9 @@ defaults = {
 "Debug": false,
 "DumpEnabled": false,
 "DumpFormat": "$artist - $title",
-"TextColor": Color( 1, 1, 1, 1 )
+"SpotifyPort": 80,
+"TextColor": Color( 1, 1, 1, 1 ),
+"VlcHost": "127.0.0.1",
+"VlcPassword": "Password",
+"VlcPort": 8080
 }
