@@ -1,35 +1,29 @@
-[gd_resource type="Theme" load_steps=18 format=2]
+[gd_resource type="Theme" load_steps=17 format=2]
 
-[ext_resource path="res://Assets/Style/FontBold.tres" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Style/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Style/FontLight.tres" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Style/FlatAccent.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Style/FlatBackground.tres" type="StyleBox" id=4]
-[ext_resource path="res://Assets/Style/CheckOn.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Style/CheckOff.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Style/CheckOnTex.tres" type="Texture" id=5]
+[ext_resource path="res://Assets/Style/CheckOffTex.tres" type="Texture" id=6]
 [ext_resource path="res://Assets/Style/FlatBackgroundPopup.tres" type="StyleBox" id=7]
 [ext_resource path="res://Assets/Style/FlatForegroundPopup.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Style/FlatBackgroundHighlight.tres" type="StyleBox" id=9]
 [ext_resource path="res://Assets/Style/FlatEmpty.tres" type="StyleBox" id=10]
 [ext_resource path="res://Assets/Style/FlatBackgroundDownlight.tres" type="StyleBox" id=11]
-[ext_resource path="res://Assets/Style/Seperator.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Style/SeperatorTex.tres" type="Texture" id=12]
 [ext_resource path="res://Assets/Style/FlatBarBackground.tres" type="StyleBox" id=13]
 [ext_resource path="res://Assets/Style/EditFont.tres" type="DynamicFont" id=14]
 
 [sub_resource type="StyleBoxTexture" id=7]
 texture = ExtResource( 12 )
-region_rect = Rect2( 0, 0, 8, 4 )
+region_rect = Rect2( 0, 0, 8, 2 )
 
 [sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
-fallback/0 = ExtResource( 2 )
-
 [resource]
-default_font = SubResource( 3 )
+default_font = ExtResource( 1 )
 BetterProgressBar/styles/background = ExtResource( 13 )
 BetterProgressBar/styles/foreground = ExtResource( 3 )
 Button/styles/disabled = ExtResource( 10 )

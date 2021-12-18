@@ -9,6 +9,8 @@ export var value : float = 0.0 setget set_value;
 var difference : float = 1.0;
 var progress : float = 0.0;
 
+var actual_theme : Theme;
+
 func set_min_value(var _min_value):
 	if _min_value > max_value:
 		min_value = max_value;
@@ -33,10 +35,18 @@ func set_value(var _value):
 	value = _value;
 
 func get_theme_or_root():
-	if theme != null:
-		return theme;
-	theme = Theme.new();
-	return theme;
+	if actual_theme != null:
+		return actual_theme;
+	var node = self;
+	while true:
+		if node == null:
+			break;
+		if node is Control and node.theme != null:
+			actual_theme = node.theme;
+			return actual_theme;
+		node = node.get_node("../");
+	actual_theme = Theme.new();
+	return actual_theme;
 	
 func get_box(var box_name):
 	var _theme = get_theme_or_root();
@@ -44,11 +54,14 @@ func get_box(var box_name):
 		_theme.set_stylebox(box_name, "BetterProgressBar", StyleBoxFlat.new());
 	return _theme.get_stylebox(box_name, "BetterProgressBar");
 
+func _draw():
+	get_box("background").draw(self.get_canvas_item(), Rect2(0, 0, rect_size.x, rect_size.y));
+	get_box("foreground").draw(self.get_canvas_item(), Rect2(0, 0, rect_size.x * progress, rect_size.y));
+	
 func _process(_delta):
 	if Engine.editor_hint:
 		update_bar();
-	get_box("background").draw(self.get_canvas_item(), Rect2(0, 0, rect_size.x, rect_size.y));
-	get_box("foreground").draw(self.get_canvas_item(), Rect2(0, 0, rect_size.x * progress, rect_size.y));
+	update();
 	
 func _physics_process(_delta):
 	update_bar();

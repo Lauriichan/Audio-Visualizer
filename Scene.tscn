@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Assets/Style/Nexa Bold.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://Assets/Style/FontLight.tres" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Style/TitleFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Style/AritstFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Script/BetterProgressBar.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Style/Theme.tres" type="Theme" id=4]
 [ext_resource path="res://Assets/Script/AudioSpectrum.gd" type="Script" id=5]
@@ -19,21 +19,10 @@ _data = [ Vector2( 0.046875, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 
 width = 32
 curve = SubResource( 9 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 40
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 28
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 2 )
-
 [node name="Root" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 4 )
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -106,8 +95,7 @@ __meta__ = {
 [node name="Title" type="Label" parent="Body/VBoxContainer"]
 margin_right = 275.0
 margin_bottom = 40.0
-theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = ExtResource( 1 )
 text = "Vibe With Me"
 uppercase = true
 __meta__ = {
@@ -118,8 +106,7 @@ __meta__ = {
 margin_top = 44.0
 margin_right = 275.0
 margin_bottom = 72.0
-theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "Joakim Kaud"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -141,7 +128,6 @@ margin_left = 322.0
 margin_top = 270.0
 margin_right = 1262.0
 margin_bottom = 294.0
-theme = ExtResource( 4 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

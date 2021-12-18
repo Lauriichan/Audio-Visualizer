@@ -1,0 +1,16 @@
+[gd_resource type="ImageTexture" load_steps=2 format=2]
+
+[sub_resource type="Image" id=1]
+data = {
+"data": PoolByteArray( 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52 ),
+"format": "RGB8",
+"height": 2,
+"mipmaps": false,
+"width": 8
+}
+
+[resource]
+flags = 0
+flags = 0
+image = SubResource( 1 )
+size = Vector2( 8, 2 )
