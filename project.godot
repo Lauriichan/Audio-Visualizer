@@ -34,10 +34,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Assets/Script/Dropdown/DropdownButton.gd"
 }, {
+"base": "Node",
+"class": "HttpPool",
+"language": "GDScript",
+"path": "res://Assets/ThrownScript/HttpPool.gd"
+}, {
+"base": "Reference",
+"class": "HttpServer",
+"language": "GDScript",
+"path": "res://Assets/ThrownScript/HttpServer.gd"
+}, {
 "base": "Reference",
 "class": "Song",
 "language": "GDScript",
 "path": "res://Assets/Script/Api/SongStruct.gd"
+}, {
+"base": "BaseApi",
+"class": "Spotify",
+"language": "GDScript",
+"path": "res://Assets/ThrownScript/Spotify.gd"
+}, {
+"base": "Node",
+"class": "ThreadPool",
+"language": "GDScript",
+"path": "res://Assets/ThrownScript/ThreadPool.gd"
 }, {
 "base": "BaseApi",
 "class": "VLC",
@@ -50,7 +70,11 @@ _global_script_class_icons={
 "BaseApi": "",
 "BetterProgressBar": "",
 "DropdownButton": "",
+"HttpPool": "",
+"HttpServer": "",
 "Song": "",
+"Spotify": "",
+"ThreadPool": "",
 "VLC": ""
 }
 

@@ -1,10 +1,12 @@
 extends BaseApi
 class_name VLC
 
-var request : HTTPRequest;
+var request : HTTPClient;
 var parser : XMLParser;
 var auth : String;
-var url : String;
+
+var host : String;
+var port : int;
 
 var ref : FuncRef;
 
@@ -16,19 +18,29 @@ func _ready():
 	ref.set_instance(self);
 
 func _update() -> Song:
+	
+	var _ignore = request.poll();
+	if request.get_status() != HTTPClient.STATUS_CONNECTED and request.get_status() != HTTPClient.STATUS_BODY:
+		if request.get_status() == HTTPClient.STATUS_CONNECTING:
+			return null;
+		_ignore = request.connect_to_host(host, port, false, true);
+		return null;
 	var headers = [
 		"Authorization: Basic " + auth
 	];
-	if request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
-		request.cancel_request();
-	var error = request.request(url, headers, true, HTTPClient.METHOD_GET);
+	var error = request.request(HTTPClient.METHOD_GET, "/requests/status.xml", headers);
 	if error != OK:
 		return null;
-	while not result:
-		yield();
-	if not result is PoolByteArray:
+	
+	_ignore = request.poll();
+	while request.get_status() == HTTPClient.STATUS_REQUESTING:
+		OS.delay_msec(1)
+		_ignore = request.poll();
+	
+	if not request.has_response():
 		return null;
-	error = parser.open_buffer(result);
+	_ignore = request.poll();
+	error = parser.open_buffer(request.read_response_body_chunk());
 	result = null;
 	if error != OK:
 		return null;
@@ -106,18 +118,15 @@ func _receive_request(_result, _response_code, _headers, _body):
 	result = _body;
 	
 func _update_api():
-	url = "http://" + Settings.get_default("VlcHost", "127.0.0.1") + ":" + str(Settings.get_default("VlcPort", 8080)) + "/requests/status.xml";
-	print(url);
+	host = Settings.get_default("VlcHost", "127.0.0.1");
+	port = Settings.get_default("VlcPort", 8080);
 	auth = Marshalls.utf8_to_base64(":" + Settings.get_default("VlcPassword", "Password"));
 
 func _on_enable():
-	request = HTTPRequest.new();
+	request = HTTPClient.new();
 	parser = XMLParser.new();
-	add_child(request);
-	var _ignore = request.connect("request_completed", self, "_receive_request");
 	
-func _on_disalbe():
-	remove_child(request);
+func _on_disable():
 	parser.queue_free();
 	parser = null;
 	request.queue_free();
