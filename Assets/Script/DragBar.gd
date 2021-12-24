@@ -2,6 +2,12 @@ extends Control
 
 var prevPoint = Vector2();
 var dragging = false;
+var last = 0;
+var count = 0;
+
+func _physics_process(delta):
+	if last > 0:
+		last -= delta;
 
 func _input(_event):
 	if _event is InputEventMouseButton:
@@ -11,6 +17,12 @@ func _input(_event):
 
 func _button(_event : InputEventMouseButton):
 	if _event.button_index == BUTTON_LEFT:
+		if _event.pressed and _is_inside():
+			if last > 0:
+				fullscreen();
+				last = 0;
+			else:
+				last = 0.75;
 		if _event.pressed and not dragging and _is_inside():
 			prevPoint = get_global_mouse_position();
 			dragging = true;
@@ -18,6 +30,13 @@ func _button(_event : InputEventMouseButton):
 		elif not _event.pressed and dragging:
 			dragging = false;
 			return;
+			
+func fullscreen():
+	OS.window_fullscreen = !OS.window_fullscreen;
+	if OS.window_fullscreen:
+		get_tree().change_scene("res://Fullscreen.tscn");
+	else:
+		get_tree().change_scene("res://Scene.tscn");
 
 func _motion(_event : InputEventMouseMotion):
 	if dragging:
