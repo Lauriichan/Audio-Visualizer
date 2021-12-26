@@ -33,10 +33,11 @@ func _button(_event : InputEventMouseButton):
 			
 func fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen;
+	var _ignore;
 	if OS.window_fullscreen:
-		get_tree().change_scene("res://Fullscreen.tscn");
+		_ignore = get_tree().change_scene("res://Fullscreen.tscn");
 	else:
-		get_tree().change_scene("res://Scene.tscn");
+		_ignore = get_tree().change_scene("res://Scene.tscn");
 
 func _motion(_event : InputEventMouseMotion):
 	if dragging:

@@ -28,7 +28,7 @@ defaults = {
 "Debug": false,
 "DumpEnabled": false,
 "DumpFormat": "$artist - $title",
-"SpotifyPort": 80,
+"SpotifyPort": 7840,
 "TextColor": Color( 0.607843, 0.596078, 0.647059, 1 ),
 "VlcHost": "127.0.0.1",
 "VlcPassword": "Password",
@@ -80,7 +80,7 @@ text = "Api"
 align = 0
 switch_on_hover = true
 script = ExtResource( 2 )
-itemList = [ "VLC" ]
+itemList = [ "VLC", "StreamCompanion" ]
 selected = "VLC"
 
 [node name="DataAudio" type="MenuButton" parent="ScrollContainer/VBoxContainer"]
@@ -205,15 +205,15 @@ margin_top = 342.0
 margin_right = 296.0
 margin_bottom = 358.0
 rect_pivot_offset = Vector2( -95, -12 )
-text = "  Spotify Port"
+text = "  StreamCompanion Port"
 
-[node name="SpotifyPort" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+[node name="StreamCompanionPort" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
 margin_top = 362.0
 margin_right = 296.0
 margin_bottom = 388.0
 min_value = 1.0
 max_value = 65535.0
-value = 80.0
+value = 7840.0
 
 [node name="HSeparator7" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 margin_top = 392.0

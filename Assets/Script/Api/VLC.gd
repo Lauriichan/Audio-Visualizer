@@ -127,7 +127,6 @@ func _on_enable():
 	parser = XMLParser.new();
 	
 func _on_disable():
-	parser.queue_free();
 	parser = null;
-	request.queue_free();
+	request.close();
 	request = null;
