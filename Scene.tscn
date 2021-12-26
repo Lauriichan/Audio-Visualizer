@@ -175,7 +175,7 @@ defaults = {
 "Debug": false,
 "DumpEnabled": false,
 "DumpFormat": "$artist - $title",
-"SpotifyPort": 7840,
+"StreamCompanionPort": 7840,
 "TextColor": Color( 0.607843, 0.596078, 0.647059, 1 ),
 "VlcHost": "127.0.0.1",
 "VlcPassword": "Password",

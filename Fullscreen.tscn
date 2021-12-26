@@ -42,8 +42,8 @@ autoplay = true
 
 [node name="Api" type="Node" parent="."]
 script = ExtResource( 9 )
-refresh_rates = [ 0.5 ]
-api_names = [ "VLC" ]
+refresh_rates = [ 0.5, 0.5 ]
+api_names = [ "VLC", "StreamCompanion" ]
 
 [node name="Bar" type="Control" parent="."]
 margin_right = 1300.0
@@ -175,7 +175,7 @@ defaults = {
 "Debug": false,
 "DumpEnabled": false,
 "DumpFormat": "$artist - $title",
-"SpotifyPort": 80,
+"StreamCompanionPort": 7840,
 "TextColor": Color( 0.607843, 0.596078, 0.647059, 1 ),
 "VlcHost": "127.0.0.1",
 "VlcPassword": "Password",
