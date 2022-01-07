@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "API",
+"language": "GDScript",
+"path": "res://Assets/Script/Api/Api.gd"
+}, {
 "base": "DropdownButton",
 "class": "AudioDropdownButton",
 "language": "GDScript",
@@ -70,6 +75,7 @@ _global_script_classes=[ {
 "path": "res://Assets/Script/Api/VLC.gd"
 } ]
 _global_script_class_icons={
+"API": "",
 "AudioDropdownButton": "",
 "AudioSpectrum": "",
 "BaseApi": "",
@@ -89,6 +95,7 @@ _global_script_class_icons={
 config/name="Audio Visualizer"
 run/main_scene="res://Scene.tscn"
 run/low_processor_mode=true
+run/low_processor_mode_sleep_usec=11500
 boot_splash/image="res://boot.png"
 boot_splash/use_filter=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )

@@ -1,4 +1,5 @@
 extends Node
+class_name API
 
 var boot_icon : Image = load("boot.png");
 
@@ -19,6 +20,8 @@ var ui_icon : TextureRect;
 var ui_title : Label;
 var ui_artist : Label;
 
+var started : bool = true;
+
 func _ready():
 	var body = get_node("../Body");
 	ui_bar = body.get_node("BetterProgressBar");
@@ -37,8 +40,23 @@ func _root_ready(root):
 		node.set_name(api_name);
 		node.set_script(gdscript);
 		add_child(node);
+		
+func _start():
+	if started:
+		return;
+	started = true;
+	_update_api();
+	
+func _stop():
+	if not started:
+		return;
+	started = false;
+	if not selected.empty():
+		get_node(selected).disable();
 
 func _update_api():
+	if not started:
+		return;
 	_update_dump();
 	_update_audio();
 	var updated = Settings.get_default("DataApi", "VLC");

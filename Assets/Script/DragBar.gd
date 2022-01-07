@@ -5,6 +5,8 @@ var dragging = false;
 var last = 0;
 var count = 0;
 
+onready var api = get_node("/root/Root/Api");
+
 func _physics_process(delta):
 	if last > 0:
 		last -= delta;
@@ -34,6 +36,8 @@ func _button(_event : InputEventMouseButton):
 func fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen;
 	var _ignore;
+	
+	api._stop();
 	if OS.window_fullscreen:
 		_ignore = get_tree().change_scene("res://Fullscreen.tscn");
 	else:

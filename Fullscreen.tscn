@@ -42,7 +42,7 @@ autoplay = true
 
 [node name="Api" type="Node" parent="."]
 script = ExtResource( 9 )
-refresh_rates = [ 0.5, 0.5 ]
+refresh_rates = [ 0.75, 0.75 ]
 api_names = [ "VLC", "StreamCompanion" ]
 
 [node name="Bar" type="Control" parent="."]
