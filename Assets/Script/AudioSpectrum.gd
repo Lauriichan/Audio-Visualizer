@@ -41,7 +41,7 @@ func _set_bar_width(var value):
 func _set_bar_height(var value):
 	MinimumHeight = value;
 	_update_bars();
-	
+
 func _set_amount(var value):
 	Amount = value;
 	_update_bars();
@@ -58,7 +58,7 @@ func _update_bars():
 	bars.resize(Amount);
 	var space = (rect_size.x - (Amount * BarWidth)) / (Amount - 1);
 	var width = BarWidth;
-	var height = MinimumHeight;
+	var height = 0;
 	if Engine.editor_hint:
 		height = rect_size.y;
 	for i in range(Amount):
@@ -72,13 +72,14 @@ func _ready():
 	_update_bars();
 	Engine.set_target_fps(targetFps);
 	Engine.set_iterations_per_second(targetUps);
-	
+
 func _draw():
 	var barx = bars.duplicate();
 	for i in range(Amount):
 		var bar = barx[i];
-		draw_rect(Rect2(bar["x"], rect_size.y - bar["h"], bar["w"], bar["h"]), BarColor);
-		
+		var height = MinimumHeight + bar["h"];
+		draw_rect(Rect2(bar["x"], rect_size.y - height, bar["w"], height), BarColor);
+
 func update_spectrum(delta):
 	var _spec = get_spectrum();
 	if !_spec:
@@ -87,20 +88,21 @@ func update_spectrum(delta):
 	var prev_hz = MinimumFrequency;
 	var freq = MaximumFrequency - MinimumFrequency;
 	for i in range(1, Amount+1):
-		var prev_height = bars[i - 1]["h"] - MinimumHeight;
 		var hz = (i * freq / Amount) + MinimumFrequency;
 		var magnitude: float = _spec.get_magnitude_for_frequency_range(prev_hz, hz).length();
 		var energy = clamp((Multiplier * Divider + linear2db(magnitude)) / Divider, 0, 1);
-		bars[i - 1]["h"] = smooth(prev_height, (energy * nodeHeight), delta * Speed) + MinimumHeight;
+		bars[i - 1]["h"] = smooth(bars[i - 1]["h"], (energy * nodeHeight), delta * Speed);
 		prev_hz = hz;
-		
+
 func smooth(var prev_height, var height, var delta):
+	if prev_height == null:
+		prev_height = 0;
 	match (SmoothType):
 		SmoothMethod.NONE:
 			return height;
 		SmoothMethod.LINEAR:
 			return lerp(prev_height, height, delta);
-	
+
 func get_spectrum():
 	if spectrum:
 		return spectrum;
@@ -109,11 +111,11 @@ func get_spectrum():
 	effect.set_fft_size(FFTSizeType);
 	spectrum = AudioServer.get_bus_effect_instance(0, 0);
 	return spectrum;
-	
+
 func _process(_delta):
 	update();
 	if Engine.editor_hint:
 		_set_amount(Amount);
-		
+
 func _physics_process(delta):
 	update_spectrum(delta);
