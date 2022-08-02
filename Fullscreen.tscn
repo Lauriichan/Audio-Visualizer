@@ -32,9 +32,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 4 )
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AudioListener" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 7 )
@@ -151,16 +148,17 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-MinimumFrequency = 0.0
-MaximumFrequency = 9600.0
-Divider = 95.0
-Multiplier = 1.15
-Speed = 5.0
+MaximumFrequency = 16000.0
+SmoothSpeed = 5.0
+Smoothing = true
+SmoothingScale = 0.839
+Decibil = true
 Amount = 512
-FFTBufferSize = 8.0
+FFTSizeType = 4
+FFTBufferSize = 6.0
 BarWidth = 2.0
-targetFps = 45
-targetUps = 45
+targetFps = 60
+targetUps = 60
 
 [node name="Dropdown" parent="." instance=ExtResource( 7 )]
 visible = false

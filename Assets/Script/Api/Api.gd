@@ -15,15 +15,19 @@ var previous : Song;
 var dump_song : bool;
 var dump_format : String;
 
+var ui_spectrum : AudioSpectrum;
 var ui_bar : BetterProgressBar;
 var ui_icon : TextureRect;
 var ui_title : Label;
 var ui_artist : Label;
+var ui_debug : Control;
 
 var started : bool = true;
 
 func _ready():
+	ui_debug = get_node("../Debug");
 	var body = get_node("../Body");
+	ui_spectrum = body.get_node("AudioSpectrum");
 	ui_bar = body.get_node("BetterProgressBar");
 	ui_icon = body.get_node("TextureRect");
 	ui_title = body.get_node("VBoxContainer/Title");
@@ -57,6 +61,7 @@ func _stop():
 func _update_api():
 	if not started:
 		return;
+	_update_debug();
 	_update_dump();
 	_update_audio();
 	var updated = Settings.get_default("DataApi", "VLC");
@@ -74,6 +79,16 @@ func _update_api():
 	node.enable();
 	node._update_api();
 	
+func _update_debug():
+	var debug = Settings.get_default("Debug", false);
+	if(!ui_debug):
+		return;
+	if(debug):
+		ui_debug.show();
+	elif(ui_debug.visible):
+		ui_debug.hide();
+	ui_spectrum.debug = debug;
+	
 func _update_dump():
 	dump_song = Settings.get_default("DumpEnabled", false);
 	dump_format = Settings.get_default("DumpFormat", "$artist - $title")
@@ -81,6 +96,8 @@ func _update_dump():
 		_dump_to_file();
 		
 func _update_audio():
+	if !ui_spectrum.legacy:
+		ui_spectrum.reset = true;
 	var device = Settings.get_default("DataAudio", "Default");
 	if AudioServer.capture_get_device() == device:
 		return;

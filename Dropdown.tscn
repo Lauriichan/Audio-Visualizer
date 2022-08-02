@@ -67,7 +67,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 296.0
-margin_bottom = 614.0
+margin_bottom = 642.0
 rect_min_size = Vector2( 296, 250 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -266,31 +266,42 @@ margin_bottom = 546.0
 text = "127.0.0.1"
 clear_button_enabled = true
 
-[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+[node name="HSeparator6" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 margin_top = 550.0
 margin_right = 296.0
 margin_bottom = 554.0
 
-[node name="OpenConfigButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+[node name="Debug" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
 margin_top = 558.0
 margin_right = 296.0
 margin_bottom = 574.0
+text = "Debug"
+
+[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 578.0
+margin_right = 296.0
+margin_bottom = 582.0
+
+[node name="OpenConfigButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+margin_top = 586.0
+margin_right = 296.0
+margin_bottom = 602.0
 text = "Open Config"
 script = ExtResource( 5 )
 action = "var _ignore = OS.shell_open(\"file://\" + get_node(\"../../../../\").get_data_path());"
 
 [node name="ReloadConfigButton" type="Button" parent="ScrollContainer/VBoxContainer"]
-margin_top = 578.0
+margin_top = 606.0
 margin_right = 296.0
-margin_bottom = 594.0
+margin_bottom = 622.0
 text = "Reload Config"
 script = ExtResource( 5 )
 action = "get_node(\"../../../../\")._load_data();"
 
 [node name="ExitButton" type="Button" parent="ScrollContainer/VBoxContainer"]
-margin_top = 598.0
+margin_top = 626.0
 margin_right = 296.0
-margin_bottom = 614.0
+margin_bottom = 642.0
 text = "Exit"
 script = ExtResource( 5 )
 action = "get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)"
