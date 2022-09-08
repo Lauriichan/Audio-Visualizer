@@ -2,7 +2,6 @@ extends BaseApi
 class_name VLC
 
 var request : HTTPClient;
-var parser : XMLParser;
 var auth : String;
 
 var host : String;
@@ -40,20 +39,17 @@ func _update() -> Song:
 	if not request.has_response():
 		return null;
 	_ignore = request.poll();
+	var parser = XMLParser.new();
 	error = parser.open_buffer(request.read_response_body_chunk());
 	result = null;
 	if error != OK:
 		return null;
-	return _parse_song();
+	return _parse_song(parser);
 
-func _parse_song() -> Song:
+func _parse_song(parser) -> Song:
 	var song = Song.new();
 	song.image_loader = ref;
-	skip_to_node("state")
-	song.playing = parser.get_node_data() == "playing";
-	skip_to_node("position");
-	song.progress = float(parser.get_node_data());
-	skip_to_node("category");
+	load_until_node(parser, song, "category");
 	var _ignore = parser.read();
 	while true:
 		if parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.get_node_name().begins_with("category"):
@@ -63,11 +59,11 @@ func _parse_song() -> Song:
 			_ignore = parser.read();
 			if parser.get_node_type() != XMLParser.NODE_TEXT:
 				continue;
-			read_next(song, key);
+			read_next(parser, song, key);
 		_ignore = parser.read();
 	return song;
 
-func read_next(song, key):
+func read_next(parser, song, key):
 	match key:
 		"artist":
 			song.artist = parser.get_node_data();
@@ -87,17 +83,23 @@ func read_next(song, key):
 					for idx in range(parts.size() - 1):
 						out = out + parts[idx];
 					song.title = out;
-
-func skip_to_node(key):
+		"position":
+			song.progress = float(parser.get_node_data());
+		"state":
+			song.playing = parser.get_node_data() == "playing";
+		
+func load_until_node(parser, song, key):
 	var _ignore;
 	while true:
 		if parser.get_node_type() != XMLParser.NODE_ELEMENT and parser.get_node_type() != XMLParser.NODE_ELEMENT_END:
 			_ignore = parser.read();
 			continue;
-		if parser.get_node_name().begins_with(key):
-			_ignore = parser.read();
-			break;
+		var current_key = parser.get_node_name();
 		_ignore = parser.read();
+		if current_key.begins_with(key):
+			return;
+		if parser.get_node_type() == XMLParser.NODE_TEXT:
+			read_next(parser, song, current_key);
 
 func _load_image(data):
 	if data == null or data.empty():
@@ -124,9 +126,7 @@ func _update_api():
 
 func _on_enable():
 	request = HTTPClient.new();
-	parser = XMLParser.new();
 	
 func _on_disable():
-	parser = null;
 	request.close();
 	request = null;

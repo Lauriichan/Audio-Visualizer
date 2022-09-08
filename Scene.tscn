@@ -139,9 +139,6 @@ margin_top = 128.0
 margin_right = 1264.0
 margin_bottom = 268.0
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 MinimumFrequency = 120.0
 MaximumFrequency = 12000.0
 LegacyMultiplier = 1.5
@@ -155,25 +152,6 @@ FFTBufferSize = 6.0
 BarWidth = 2.0
 targetFps = 60
 targetUps = 60
-
-[node name="Dropdown" parent="." instance=ExtResource( 7 )]
-visible = false
-defaults = {
-"AccentColor": Color( 0.968627, 0.223529, 0.498039, 1 ),
-"BackgroundColor": Color( 0.0705882, 0.0705882, 0.0705882, 1 ),
-"BarBackgroundColor": Color( 0.180392, 0.176471, 0.176471, 1 ),
-"BarBorderColor": Color( 0.32549, 0.32549, 0.32549, 1 ),
-"DataApi": "VLC",
-"DataAudio": "Default",
-"Debug": false,
-"DumpEnabled": false,
-"DumpFormat": "$artist - $title",
-"StreamCompanionPort": 7840,
-"TextColor": Color( 0.607843, 0.596078, 0.647059, 1 ),
-"VlcHost": "127.0.0.1",
-"VlcPassword": "Password",
-"VlcPort": 8080
-}
 
 [node name="Debug" type="Control" parent="."]
 margin_left = 3.0
@@ -217,3 +195,6 @@ margin_right = 732.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 160, 0 )
 rect_pivot_offset = Vector2( -41, -7 )
+
+[node name="Dropdown" parent="." instance=ExtResource( 7 )]
+visible = false

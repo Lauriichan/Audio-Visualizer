@@ -19,7 +19,7 @@ export(bool) var Decibil = false setget _set_decibil;
 export(int, 0, 2048) var Amount = 16 setget _set_amount;
 export(SmoothMethod) var SmoothType = SmoothMethod.LINEAR;
 export(FFTSize) var FFTSizeType = FFTSize.FFT_2048;
-export(float, 1, 30) var FFTBufferSize = 3;
+export(float, 1, 30) var FFTBufferSize = 3.0;
 
 export(float) var MinimumHeight = 2.0 setget _set_bar_height;
 export(float) var BarWidth = 20.0 setget _set_bar_width;
@@ -95,6 +95,11 @@ func _set_target_fps(var value):
 func _set_target_ups(var value):
 	targetUps = value;
 	Engine.set_iterations_per_second(value);
+	
+func _reset_magnitude():
+	print("Reset");
+	min_mag = 0;
+	max_mag = 0;
 
 func _update_bars():
 	bars.resize(Amount);
@@ -183,7 +188,6 @@ func update_spectrum(_delta):
 		if(abs(magnitude) <= abs(min_mag / 8)):
 			mag_count += 1;
 		prev_hz = hz;
-		
 	var range_mag = max_mag - min_mag;
 	if is_inf(range_mag):
 		range_mag = 0;
