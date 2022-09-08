@@ -97,7 +97,6 @@ func _set_target_ups(var value):
 	Engine.set_iterations_per_second(value);
 	
 func _reset_magnitude():
-	print("Reset");
 	min_mag = 0;
 	max_mag = 0;
 
