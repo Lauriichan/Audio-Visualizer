@@ -132,6 +132,7 @@ func _read_update():
 			current_song = null;
 			continue;
 		current_song = _parse_song(parser);
+	request.close();
 	
 func _update_api():
 	host = Settings.get_default("VlcHost", "127.0.0.1");
@@ -139,11 +140,14 @@ func _update_api():
 	auth = Marshalls.utf8_to_base64(":" + Settings.get_default("VlcPassword", "Password"));
 
 func _on_enable():
-	request = HTTPClient.new();
+	if request == null:
+		request = HTTPClient.new();
 	thread = Thread.new();
 	run = true;
 	var _ignore = thread.start(self, "_read_update");
 	
 func _on_disable():
-	request.close();
-	request = null;
+	run = false;
+	if thread.is_alive():
+		thread.wait_to_finish();
+	thread = null;
