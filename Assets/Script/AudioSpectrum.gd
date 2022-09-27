@@ -74,7 +74,6 @@ func _find_labels():
 
 func _set_color(var value):
 	BarColor = value;
-	_update_bars();
 
 func _set_bar_width(var value):
 	BarWidth = value;

@@ -104,8 +104,8 @@ func _read_update():
 			if request.get_status() == HTTPClient.STATUS_CONNECTING:
 				current_song = null;
 				continue;
-			_ignore = request.connect_to_host(host, port, false, true);
 			current_song = null;
+			_ignore = request.connect_to_host(host, port, false, true);
 			continue;
 		var headers = [
 			"Authorization: Basic " + auth
@@ -148,6 +148,5 @@ func _on_enable():
 	
 func _on_disable():
 	run = false;
-	if thread.is_alive():
-		thread.wait_to_finish();
+	thread.wait_to_finish();
 	thread = null;

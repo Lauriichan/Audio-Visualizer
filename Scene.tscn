@@ -200,6 +200,9 @@ rect_pivot_offset = Vector2( -41, -7 )
 visible = false
 defaults = {
 "AccentColor": Color( 0.968627, 0.223529, 0.498039, 1 ),
+"AccentGradColor": Color( 0.43, 0.0989, 0.220303, 1 ),
+"AccentSpeed": 100,
+"AccentType": "Static",
 "BackgroundColor": Color( 0.0705882, 0.0705882, 0.0705882, 1 ),
 "BarBackgroundColor": Color( 0.180392, 0.176471, 0.176471, 1 ),
 "BarBorderColor": Color( 0.32549, 0.32549, 0.32549, 1 ),

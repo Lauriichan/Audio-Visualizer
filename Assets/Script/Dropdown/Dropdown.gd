@@ -5,6 +5,7 @@ signal update_settings
 export(String) var path = "user://settings.json";
 export(Dictionary) var defaults = {};
 
+
 func _ready():
 	_setup_picker($ScrollContainer/VBoxContainer/AccentColor);
 	_setup_picker($ScrollContainer/VBoxContainer/TextColor);
@@ -16,8 +17,6 @@ func _setup_picker(node : ColorPickerButton):
 	node.get_picker().rect_scale = Vector2(1, 0.8);
 	node.get_popup().rect_min_size = node.get_picker().rect_size * node.get_picker().rect_scale;
 	node.get_popup().rect_size = node.get_popup().rect_min_size;
-
-# TODO: Add possibility to change audio line
 
 func get_data_path() -> String:
 	return path.replace("user://", OS.get_user_data_dir() + '/');
@@ -120,6 +119,15 @@ func _apply_data(): # Apply data to Theme
 	style_color("BarBackgroundColor", {
 		"BetterProgressBar": "background"
 	});
+	node_color("BackgroundColor", {
+		"../Body/ColorRect": "color"
+	});
+	node_color("BorderColor", {
+		"../Body/ColorRect2": "color"
+	});
+	_apply_accent();
+	
+func _apply_accent():
 	style_color("AccentColor", {
 		"BetterProgressBar": "foreground",
 		"VScrollBar": [
@@ -127,12 +135,6 @@ func _apply_data(): # Apply data to Theme
 			"grabber_highlight",
 			"grabber_pressed"
 		]
-	});
-	node_color("BackgroundColor", {
-		"../Body/ColorRect": "color"
-	});
-	node_color("BorderColor", {
-		"../Body/ColorRect2": "color"
 	});
 	node_color("AccentColor", {
 		"../Bar/ColorRect": "color",

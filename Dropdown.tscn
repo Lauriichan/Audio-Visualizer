@@ -15,11 +15,11 @@ margin_right = -996.0
 margin_bottom = -142.0
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 defaults = {
 "AccentColor": Color( 0.968627, 0.223529, 0.498039, 1 ),
+"AccentGradColor": Color( 0.43, 0.0989, 0.220303, 1 ),
+"AccentSpeed": 100,
+"AccentType": "Static",
 "BackgroundColor": Color( 0.0705882, 0.0705882, 0.0705882, 1 ),
 "BarBackgroundColor": Color( 0.180392, 0.176471, 0.176471, 1 ),
 "BarBorderColor": Color( 0.32549, 0.32549, 0.32549, 1 ),
@@ -40,9 +40,6 @@ margin_right = 304.0
 margin_bottom = 204.0
 theme = ExtResource( 1 )
 color = Color( 0.231373, 0.227451, 0.227451, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = 2.0
@@ -61,13 +58,10 @@ margin_top = 2.0
 margin_right = 302.0
 margin_bottom = 202.0
 scroll_horizontal_enabled = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 296.0
-margin_bottom = 642.0
+margin_bottom = 752.0
 rect_min_size = Vector2( 296, 250 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -164,87 +158,127 @@ margin_right = 296.0
 margin_bottom = 244.0
 rect_pivot_offset = Vector2( -95, -30 )
 
-[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+[node name="Label11" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 248.0
 margin_right = 296.0
-margin_bottom = 252.0
+margin_bottom = 264.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Accent (Gradient)"
+
+[node name="AccentGradColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 268.0
+margin_right = 296.0
+margin_bottom = 284.0
+rect_pivot_offset = Vector2( -95, -30 )
+
+[node name="Label12" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 288.0
+margin_right = 296.0
+margin_bottom = 304.0
+rect_pivot_offset = Vector2( -95, -12 )
+text = "  Accent Speed"
+
+[node name="AccentSpeed" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 308.0
+margin_right = 296.0
+margin_bottom = 334.0
+min_value = 1.0
+max_value = 1000.0
+value = 100.0
+
+[node name="AccentType" type="MenuButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 338.0
+margin_right = 296.0
+margin_bottom = 354.0
+focus_mode = 2
+text = "Accent Type"
+align = 0
+switch_on_hover = true
+script = ExtResource( 2 )
+itemList = [ "Static", "Gradient", "Rainbow" ]
+selected = "Static"
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 358.0
+margin_right = 296.0
+margin_bottom = 362.0
 
 [node name="DumpEnabled" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
-margin_top = 256.0
+margin_top = 366.0
 margin_right = 296.0
-margin_bottom = 272.0
+margin_bottom = 382.0
 text = "Dump Song"
 
 [node name="HSeparator5" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
-margin_top = 276.0
+margin_top = 386.0
 margin_right = 296.0
-margin_bottom = 280.0
+margin_bottom = 390.0
 custom_styles/separator = SubResource( 2 )
 
 [node name="Label5" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 284.0
+margin_top = 394.0
 margin_right = 296.0
-margin_bottom = 300.0
+margin_bottom = 410.0
 rect_pivot_offset = Vector2( -95, -12 )
 text = "  Format"
 
 [node name="DumpFormat" type="LineEdit" parent="ScrollContainer/VBoxContainer"]
-margin_top = 304.0
+margin_top = 414.0
 margin_right = 296.0
-margin_bottom = 330.0
+margin_bottom = 440.0
 text = "$artist - $title"
 clear_button_enabled = true
 
 [node name="HSeparator3" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
-margin_top = 334.0
+margin_top = 444.0
 margin_right = 296.0
-margin_bottom = 338.0
+margin_bottom = 448.0
 
 [node name="Label7" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 342.0
+margin_top = 452.0
 margin_right = 296.0
-margin_bottom = 358.0
+margin_bottom = 468.0
 rect_pivot_offset = Vector2( -95, -12 )
 text = "  StreamCompanion Port"
 
 [node name="StreamCompanionPort" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
-margin_top = 362.0
+margin_top = 472.0
 margin_right = 296.0
-margin_bottom = 388.0
+margin_bottom = 498.0
 min_value = 1.0
 max_value = 65535.0
 value = 7840.0
 
 [node name="HSeparator7" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
-margin_top = 392.0
+margin_top = 502.0
 margin_right = 296.0
-margin_bottom = 396.0
+margin_bottom = 506.0
 
 [node name="Label8" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 400.0
+margin_top = 510.0
 margin_right = 296.0
-margin_bottom = 416.0
+margin_bottom = 526.0
 rect_pivot_offset = Vector2( -95, -12 )
 text = "  VLC Password"
 
 [node name="VlcPassword" type="LineEdit" parent="ScrollContainer/VBoxContainer"]
-margin_top = 420.0
+margin_top = 530.0
 margin_right = 296.0
-margin_bottom = 446.0
+margin_bottom = 556.0
 text = "Password"
 clear_button_enabled = true
 
 [node name="Label9" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 450.0
+margin_top = 560.0
 margin_right = 296.0
-margin_bottom = 466.0
+margin_bottom = 576.0
 rect_pivot_offset = Vector2( -95, -12 )
 text = "  VLC Port"
 
 [node name="VlcPort" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
-margin_top = 470.0
+margin_top = 580.0
 margin_right = 296.0
-margin_bottom = 496.0
+margin_bottom = 606.0
 min_value = 1.0
 max_value = 65535.0
 value = 8080.0
@@ -253,55 +287,55 @@ __meta__ = {
 }
 
 [node name="Label10" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 500.0
+margin_top = 610.0
 margin_right = 296.0
-margin_bottom = 516.0
+margin_bottom = 626.0
 rect_pivot_offset = Vector2( -95, -12 )
 text = "  VLC Host"
 
 [node name="VlcHost" type="LineEdit" parent="ScrollContainer/VBoxContainer"]
-margin_top = 520.0
+margin_top = 630.0
 margin_right = 296.0
-margin_bottom = 546.0
+margin_bottom = 656.0
 text = "127.0.0.1"
 clear_button_enabled = true
 
 [node name="HSeparator6" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
-margin_top = 550.0
+margin_top = 660.0
 margin_right = 296.0
-margin_bottom = 554.0
+margin_bottom = 664.0
 
 [node name="Debug" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
-margin_top = 558.0
+margin_top = 668.0
 margin_right = 296.0
-margin_bottom = 574.0
+margin_bottom = 684.0
 text = "Debug"
 
 [node name="HSeparator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
-margin_top = 578.0
+margin_top = 688.0
 margin_right = 296.0
-margin_bottom = 582.0
+margin_bottom = 692.0
 
 [node name="OpenConfigButton" type="Button" parent="ScrollContainer/VBoxContainer"]
-margin_top = 586.0
+margin_top = 696.0
 margin_right = 296.0
-margin_bottom = 602.0
+margin_bottom = 712.0
 text = "Open Config"
 script = ExtResource( 5 )
 action = "var _ignore = OS.shell_open(\"file://\" + get_node(\"../../../../\").get_data_path());"
 
 [node name="ReloadConfigButton" type="Button" parent="ScrollContainer/VBoxContainer"]
-margin_top = 606.0
+margin_top = 716.0
 margin_right = 296.0
-margin_bottom = 622.0
+margin_bottom = 732.0
 text = "Reload Config"
 script = ExtResource( 5 )
 action = "get_node(\"../../../../\")._load_data();"
 
 [node name="ExitButton" type="Button" parent="ScrollContainer/VBoxContainer"]
-margin_top = 626.0
+margin_top = 736.0
 margin_right = 296.0
-margin_bottom = 642.0
+margin_bottom = 752.0
 text = "Exit"
 script = ExtResource( 5 )
 action = "get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)"

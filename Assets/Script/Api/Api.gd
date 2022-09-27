@@ -23,6 +23,7 @@ var ui_artist : Label;
 var ui_debug : Control;
 
 var started : bool = true;
+var reset_spectrum : int = 0;
 
 func _ready():
 	ui_debug = get_node("../Debug");
@@ -111,7 +112,13 @@ func _physics_process(delta):
 	if selected.empty():
 		return;
 	var song = get_node(selected)._update();
+	if reset_spectrum == 0:
+		reset_spectrum = -1;
+		ui_spectrum._reset_magnitude();
+	else:
+		reset_spectrum -= 1;
 	if song == null or not song is Song:
+		ui_spectrum._reset_magnitude();
 		return;
 	_update_interface(song);
 		
@@ -138,7 +145,7 @@ func _update_interface(song):
 	ui_artist.text = song.artist;
 	if previous == null or (song.title != previous.title):
 		previous = song;
-		ui_spectrum._reset_magnitude();
+		reset_spectrum = 2;
 		if dump_song:
 			_dump_to_file();
 			

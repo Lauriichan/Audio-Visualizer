@@ -75,8 +75,7 @@ func _on_disable():
 	server.stop();
 	if client != null:
 		client.disconnect_from_host();
-	if thread.is_alive():
-		thread.wait_to_finish();
+	thread.wait_to_finish();
 	client = null;
 	thread = null;
 	server = null;
