@@ -74,10 +74,7 @@ func _physics_process(_delta):
 		if target >= value:
 			value = lerp(value, target, _delta);
 		else:
-			if value < 0.999:
-				value = lerp(value, 1, _delta * 4);
-			else:
-				value = target;
+			value = lerp(value, target, _delta * 6);
 	update_bar();
 	
 func update_bar():

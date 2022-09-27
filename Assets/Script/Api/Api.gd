@@ -136,7 +136,7 @@ func _update_interface(song):
 			ui_icon.texture.image = boot_icon;
 	ui_title.text = song.title;
 	ui_artist.text = song.artist;
-	if previous == null or (song.title != previous.title and song.playing):
+	if previous == null or (song.title != previous.title):
 		previous = song;
 		ui_spectrum._reset_magnitude();
 		if dump_song:

@@ -198,3 +198,19 @@ rect_pivot_offset = Vector2( -41, -7 )
 
 [node name="Dropdown" parent="." instance=ExtResource( 7 )]
 visible = false
+defaults = {
+"AccentColor": Color( 0.968627, 0.223529, 0.498039, 1 ),
+"BackgroundColor": Color( 0.0705882, 0.0705882, 0.0705882, 1 ),
+"BarBackgroundColor": Color( 0.180392, 0.176471, 0.176471, 1 ),
+"BarBorderColor": Color( 0.32549, 0.32549, 0.32549, 1 ),
+"DataApi": "VLC",
+"DataAudio": "Default",
+"Debug": false,
+"DumpEnabled": false,
+"DumpFormat": "$artist - $title",
+"StreamCompanionPort": 7840,
+"TextColor": Color( 0.607843, 0.596078, 0.647059, 1 ),
+"VlcHost": "127.0.0.1",
+"VlcPassword": "Password",
+"VlcPort": 8080
+}

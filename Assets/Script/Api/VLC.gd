@@ -4,6 +4,9 @@ class_name VLC
 var request : HTTPClient;
 var auth : String;
 
+var thread : Thread;
+var run : bool = false;
+
 var host : String;
 var port : int;
 
@@ -11,40 +14,15 @@ var ref : FuncRef;
 
 var result = null;
 
+var current_song : Song;
+
 func _ready():
 	ref = FuncRef.new();
 	ref.function = "_load_image";
 	ref.set_instance(self);
 
 func _update() -> Song:
-	
-	var _ignore = request.poll();
-	if request.get_status() != HTTPClient.STATUS_CONNECTED and request.get_status() != HTTPClient.STATUS_BODY:
-		if request.get_status() == HTTPClient.STATUS_CONNECTING:
-			return null;
-		_ignore = request.connect_to_host(host, port, false, true);
-		return null;
-	var headers = [
-		"Authorization: Basic " + auth
-	];
-	var error = request.request(HTTPClient.METHOD_GET, "/requests/status.xml", headers);
-	if error != OK:
-		return null;
-	
-	_ignore = request.poll();
-	while request.get_status() == HTTPClient.STATUS_REQUESTING:
-		OS.delay_msec(1)
-		_ignore = request.poll();
-	
-	if not request.has_response():
-		return null;
-	_ignore = request.poll();
-	var parser = XMLParser.new();
-	error = parser.open_buffer(request.read_response_body_chunk());
-	result = null;
-	if error != OK:
-		return null;
-	return _parse_song(parser);
+	return current_song;
 
 func _parse_song(parser) -> Song:
 	var song = Song.new();
@@ -119,6 +97,42 @@ func _receive_request(_result, _response_code, _headers, _body):
 		return;
 	result = _body;
 	
+func _read_update():
+	while run:
+		var _ignore = request.poll();
+		if request.get_status() != HTTPClient.STATUS_CONNECTED:
+			if request.get_status() == HTTPClient.STATUS_CONNECTING:
+				current_song = null;
+				continue;
+			_ignore = request.connect_to_host(host, port, false, true);
+			current_song = null;
+			continue;
+		var headers = [
+			"Authorization: Basic " + auth
+		];
+		var error = request.request(HTTPClient.METHOD_GET, "/requests/status.xml", headers);
+		if error != OK:
+			current_song = null;
+			continue;
+		_ignore = request.poll();
+		while request.get_status() == HTTPClient.STATUS_REQUESTING:
+			OS.delay_msec(1)
+			_ignore = request.poll();
+		if not request.has_response():
+			current_song = null;
+			continue;
+		_ignore = request.poll();
+		var parser = XMLParser.new();
+		var buffer = request.read_response_body_chunk();
+		if buffer.size() == 0:
+			continue;
+		error = parser.open_buffer(buffer);
+		result = null;
+		if error != OK:
+			current_song = null;
+			continue;
+		current_song = _parse_song(parser);
+	
 func _update_api():
 	host = Settings.get_default("VlcHost", "127.0.0.1");
 	port = Settings.get_default("VlcPort", 8080);
@@ -126,6 +140,9 @@ func _update_api():
 
 func _on_enable():
 	request = HTTPClient.new();
+	thread = Thread.new();
+	run = true;
+	var _ignore = thread.start(self, "_read_update");
 	
 func _on_disable():
 	request.close();
