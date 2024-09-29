@@ -45,7 +45,7 @@ func fullscreen():
 
 func _motion(_event : InputEventMouseMotion):
 	if dragging:
-		window.position = (window.position - prevPoint) + get_global_mouse_position();
+		window.position = Vector2i((Vector2(window.position) - prevPoint) + get_global_mouse_position());
 
 func _is_inside() -> bool: 
 	var pos = get_local_mouse_position();

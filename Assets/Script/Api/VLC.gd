@@ -77,14 +77,12 @@ func load_until_node(parser, song, key):
 		if parser.get_node_type() == XMLParser.NODE_TEXT:
 			read_next(parser, song, current_key);
 
-func _load_image(data):
+func _load_image(data : String):
 	if data == null or data.is_empty():
 		return null;
-	var image = Image.new();
-	var error = image.load(data);
-	if error != OK:
-		return null;
-	return image;
+	if (data.begins_with("file:///")):
+		data = data.substr(8);
+	return Image.load_from_file(data);
 
 func _receive_request(_result, _response_code, _headers, _body):
 	if _result != HTTPRequest.RESULT_SUCCESS:

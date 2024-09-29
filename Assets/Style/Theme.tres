@@ -1,7 +1,7 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://druqko5jt7fu4"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://druqko5jt7fu4"]
 
 [ext_resource type="FontFile" path="res://Assets/Style/DefaultFont.tres" id="1"]
-[ext_resource type="FontFile" path="res://Assets/Style/FontLight.tres" id="2"]
+[ext_resource type="FontFile" uid="uid://drlfngrl8iwi6" path="res://Assets/Style/FontLight.tres" id="2"]
 [ext_resource type="StyleBox" path="res://Assets/Style/FlatAccent.tres" id="3"]
 [ext_resource type="StyleBox" path="res://Assets/Style/FlatBackground.tres" id="4"]
 [ext_resource type="Texture2D" path="res://Assets/Style/CheckOnTex.tres" id="5"]
@@ -11,13 +11,13 @@
 [ext_resource type="StyleBox" path="res://Assets/Style/FlatBackgroundHighlight.tres" id="9"]
 [ext_resource type="StyleBox" path="res://Assets/Style/FlatEmpty.tres" id="10"]
 [ext_resource type="StyleBox" path="res://Assets/Style/FlatBackgroundDownlight.tres" id="11"]
-[ext_resource type="Texture2D" path="res://Assets/Style/SeperatorTex.tres" id="12"]
 [ext_resource type="StyleBox" path="res://Assets/Style/FlatBarBackground.tres" id="13"]
 [ext_resource type="FontFile" path="res://Assets/Style/EditFont.tres" id="14"]
 
-[sub_resource type="StyleBoxTexture" id="7"]
-texture = ExtResource("12")
-region_rect = Rect2(0, 0, 8, 2)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d56ty"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 1)
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
 
 [sub_resource type="FontFile" id="6"]
 fallbacks = Array[Font]([ExtResource("2")])
@@ -52,7 +52,7 @@ ColorPickerButton/styles/focus = ExtResource("10")
 ColorPickerButton/styles/hover = ExtResource("10")
 ColorPickerButton/styles/normal = ExtResource("10")
 ColorPickerButton/styles/pressed = ExtResource("10")
-HSeparator/styles/separator = SubResource("7")
+HSeparator/styles/separator = SubResource("StyleBoxFlat_d56ty")
 LineEdit/fonts/font = ExtResource("14")
 MenuButton/colors/font_color_hover = Color(1, 1, 1, 1)
 MenuButton/styles/focus = ExtResource("10")

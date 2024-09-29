@@ -1,8 +1,13 @@
 res://default_bus_layout.tres
 res://default_env.tres
-res://Scene.tscn
-res://Assets/Style/Theme.tres
+res://Dropdown.tscn
 res://Assets/Style/FontLight.tres
+res://Assets/Style/Theme.tres
 res://Assets/Script/Root.gd
+res://Scene.tscn
+res://Assets/Script/Dropdown/Dropdown.gd
+res://Assets/Script/BetterProgressBar.gd
+res://Assets/Script/Api/Api.gd
 res://Assets/Script/DragBar.gd
 res://Assets/Script/AudioSpectrum.gd
+res://Assets/Script/Api/VLC.gd

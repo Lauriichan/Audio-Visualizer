@@ -136,7 +136,7 @@ func _update_interface(song):
 	else:
 		ui_bar.target = previous.progress;
 	if previous == null or song.title != previous.title:
-		var image : Image = song.image_loader.call_func(song.image_data);
+		var image : Image = song.image_loader.call(song.image_data);
 		if image != null:
 			ui_icon.texture.image = resize_if_needed(image);
 		else:
@@ -161,5 +161,5 @@ func resize_if_needed(image : Image) -> Image:
 	if height == width:
 		return image;
 	if width > height:
-		return image.get_rect(Rect2((width - height) / 2, 0, height, height));
-	return image.get_rect(Rect2(0, (height - width), width, width));
+		return image.get_region(Rect2((width - height) / 2, 0, height, height));
+	return image.get_region(Rect2(0, (height - width), width, width));

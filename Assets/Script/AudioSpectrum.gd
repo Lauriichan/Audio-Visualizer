@@ -148,7 +148,7 @@ func smooth(prev_height, height, delta):
 		SmoothMethod.NONE:
 			return height;
 		SmoothMethod.LINEAR:
-			return lerp(int(prev_height), height, delta);
+			return lerpf(prev_height, height, delta);
 
 func update_spectrum(_delta):
 	var _spec = get_spectrum();
@@ -234,6 +234,7 @@ func get_spectrum():
 	return spectrum;
 
 func _process(_delta):
+	queue_redraw();
 	if Engine.is_editor_hint():
 		_set_amount(Amount);
 

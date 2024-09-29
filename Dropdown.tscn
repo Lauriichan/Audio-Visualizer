@@ -15,6 +15,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -996.0
 offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("3")
 defaults = {
@@ -59,6 +61,7 @@ offset_left = 2.0
 offset_top = 2.0
 offset_right = 302.0
 offset_bottom = 202.0
+scroll_vertical = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 custom_minimum_size = Vector2(296, 250)
@@ -67,14 +70,17 @@ layout_mode = 2
 [node name="DataApi" type="MenuButton" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Api"
+alignment = 0
 switch_on_hover = true
 script = ExtResource("2")
+itemList = PackedStringArray("VLC", "StreamCompanion")
 selected = "VLC"
 
 [node name="DataAudio" type="MenuButton" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 focus_mode = 2
 text = "Audio Device"
+alignment = 0
 switch_on_hover = true
 script = ExtResource("4")
 selected = "Default"
@@ -87,6 +93,7 @@ layout_mode = 2
 text = "  Background"
 
 [node name="BackgroundColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="Label6" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -94,6 +101,7 @@ layout_mode = 2
 text = "  Bar Background"
 
 [node name="BarBackgroundColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -101,6 +109,7 @@ layout_mode = 2
 text = "  Bar Border"
 
 [node name="BarBorderColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -108,6 +117,7 @@ layout_mode = 2
 text = "  Text"
 
 [node name="TextColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -115,6 +125,7 @@ layout_mode = 2
 text = "  Accent"
 
 [node name="AccentColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="Label11" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -122,6 +133,7 @@ layout_mode = 2
 text = "  Accent (Gradient)"
 
 [node name="AccentGradColor" type="ColorPickerButton" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="Label12" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -138,8 +150,10 @@ value = 100.0
 layout_mode = 2
 focus_mode = 2
 text = "Accent Type"
+alignment = 0
 switch_on_hover = true
 script = ExtResource("2")
+itemList = PackedStringArray("Static", "Gradient", "Rainbow")
 selected = "Static"
 
 [node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
@@ -232,4 +246,4 @@ action = "get_node(\"../../../../\")._load_data();"
 layout_mode = 2
 text = "Exit"
 script = ExtResource("5")
-action = "get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)"
+action = "get_tree().quit()"

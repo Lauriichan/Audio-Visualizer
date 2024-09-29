@@ -10,7 +10,7 @@ var difference : float = 1.0;
 var progress : float = 0.0;
 var prev_progress : float = 0.0;
 
-var target = 0.0;
+var target : float = 0.0;
 var smoothing = false;
 
 var actual_theme : Theme;
@@ -54,7 +54,7 @@ func get_theme_or_root():
 	
 func get_box(box_name):
 	var _theme = get_theme_or_root();
-	if not _theme.has_theme_stylebox(box_name, "BetterProgressBar"):
+	if not _theme.has_stylebox(box_name, "BetterProgressBar"):
 		_theme.set_stylebox(box_name, "BetterProgressBar", StyleBoxFlat.new());
 	return _theme.get_stylebox(box_name, "BetterProgressBar");
 
@@ -69,7 +69,7 @@ func _process(_delta):
 		prev_progress = progress;
 		queue_redraw();
 	
-func _physics_process(_delta):
+func _physics_process(_delta : float):
 	if smoothing:
 		if target >= value:
 			value = lerp(value, target, _delta);

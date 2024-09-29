@@ -7,16 +7,23 @@ signal update_settings
 
 
 func _ready():
-	_setup_picker($ScrollContainer/VBoxContainer/AccentColor);
-	_setup_picker($ScrollContainer/VBoxContainer/TextColor);
-	_setup_picker($ScrollContainer/VBoxContainer/BackgroundColor);
-	_setup_picker($ScrollContainer/VBoxContainer/BarBackgroundColor);
-	_setup_picker($ScrollContainer/VBoxContainer/BarBorderColor);
+	var node : Container = $ScrollContainer/VBoxContainer;
+	for child in node.get_children():
+		if (child is ColorPickerButton):
+			_setup_picker(child);
 
 func _setup_picker(node : ColorPickerButton):
-	node.get_picker().scale = Vector2(1, 0.8);
-	node.get_popup().min_size = node.get_picker().size * node.get_picker().scale;
-	node.get_popup().size = node.get_popup().min_size;
+	node.get_picker().scale = Vector2(0.85, 0.85);
+	var size = Vector2i(node.get_picker().size * node.get_picker().scale);
+	size.x += 10;
+	node.get_popup().min_size = size;
+	node.get_popup().max_size = size;
+	node.get_popup().size = size;
+	node.get_picker().size = size;
+	node.get_popup().about_to_popup.connect(func(): node.get_popup().position.x = node.get_popup().position.x - size.x);
+	
+func _resize_popup(popup):
+	popup.position.x = popup.position.x - popup.size.x;
 
 func get_data_path() -> String:
 	return path.replace("user://", OS.get_user_data_dir() + '/');
@@ -30,12 +37,10 @@ func _load_data():
 	var content = file.get_as_text();
 	file.close();
 	var json = JSON.new()
-	json.parse(content);
-	var parseResult = json.get_data()
-	if parseResult.error_line == -1:
+	if json.parse(content) != Error.OK:
 		_setup_data();
 		return;
-	var result = parseResult.result;
+	var result = json.get_data()
 	if not result is Dictionary:
 		_setup_data();
 		return;
@@ -43,9 +48,9 @@ func _load_data():
 		if not result[key]:
 			continue;
 		if key.ends_with("Color"):
-			Settings.set(key, Color(result[key]));
+			Settings.set_data(key, Color(result[key]));
 			continue;
-		Settings.set(key, result[key]);
+		Settings.set_data(key, result[key]);
 	_setup_data();
 		
 func _setup_data(): # Setup settings dropdown
@@ -84,7 +89,9 @@ func _save_data():
 	emit_signal("update_settings");
 	var dict = {};
 	for key in Settings.data.keys():
-		var value = Settings.get(key);
+		var value = Settings.get_data(key);
+		if value == _default(key):
+			continue;
 		if value is Color:
 			dict[key] = Color(value).to_html(false);
 			continue;
@@ -101,9 +108,11 @@ func _read_data():
 			continue;
 		var value = _get_if_not_default(child);
 		if not value:
-			Settings.remove(key);
-			continue;
-		Settings.set(key, value);
+			value = _default(key)
+			if not value:
+				Settings.remove(key);
+				continue;
+		Settings.set_data(key, value);
 	
 func _apply_data(): # Apply data to Theme
 	color("TextColor", {
@@ -195,13 +204,13 @@ func _get_if_not_default(node):
 
 func _get_value(node):
 	if node is SpinBox:
-		return node.get_value();
+		return node.value;
 	if node is LineEdit:
-		return node.get_text();
+		return node.text;
 	if node is ColorPickerButton:
 		return node.color;
 	if node is CheckBox:
-		return node.is_pressed();
+		return node.button_pressed;
 	if node is DropdownButton:
 		return node._get_selected();
 	return null;
