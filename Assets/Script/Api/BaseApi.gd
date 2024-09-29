@@ -1,7 +1,7 @@
 extends Node
 class_name BaseApi
 
-onready var song_struct = load("Assets/Script/Api/SongStruct.gd");
+@onready var song_struct = load("Assets/Script/Api/SongStruct.gd");
 
 var enabled : bool;
 

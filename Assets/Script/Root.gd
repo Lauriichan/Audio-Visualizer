@@ -6,7 +6,7 @@ var prevPoint = Vector2();
 var dragging = false;
 
 var dropdown = false;
-onready var element = $Dropdown;
+@onready var element = $Dropdown;
 
 var type = 0;
 
@@ -25,8 +25,8 @@ func _ready():
 	_connect_settings(self, "_update_settings");
 	element._save_data();
 	
-func _connect_settings(var node : Node, var method : String):
-	var _ignore = element.connect("update_settings", node, method);
+func _connect_settings(node : Node, method : String):
+	var _ignore = element.connect("update_settings", Callable(node, method));
 
 func _update_settings():
 	type = 0;
@@ -55,7 +55,7 @@ func _physics_process(_delta):
 			gradient_increase = true;
 		elif gradient_pos >= 1.2:
 			gradient_increase = false;
-		Settings.set("AccentColor", gradient.interpolate(gradient_pos));
+		Settings.set("AccentColor", gradient.sample(gradient_pos));
 		element._apply_accent();
 		return;
 	rainbow_current = rainbow_current + speed;
@@ -67,21 +67,21 @@ func _physics_process(_delta):
 func _input(_event):
 	if not _event is InputEventMouseButton:
 		return;
-	if _event.button_index == BUTTON_RIGHT and _event.pressed:
+	if _event.button_index == MOUSE_BUTTON_RIGHT and _event.pressed:
 		if dropdown:
 			dropdown = false;
 			element.visible = false;
 			element._save_data();
 			return;
 		dropdown = true;
-		element.rect_position = get_local_mouse_position();
+		element.position = get_local_mouse_position();
 		element.visible = true;
 	
 func _notification(what):
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+	if what == Node.NOTIFICATION_WM_CLOSE_REQUEST:
 		element._save_data();
 		get_tree().quit();
 
 func _is_inside() -> bool: 
 	var position = get_local_mouse_position();
-	return position.x >= element.rect_position.x && position.x <= element.rect_position.x + element.rect_size.x && position.y >= element.rect_position.y && position.y <= element.rect_position.y + element.rect_size.y;
+	return position.x >= element.position.x && position.x <= element.position.x + element.size.x && position.y >= element.position.y && position.y <= element.position.y + element.size.y;

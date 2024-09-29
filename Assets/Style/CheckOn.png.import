@@ -2,12 +2,13 @@
 
 importer="image"
 type="Image"
-path="res://.import/CheckOn.png-dca1e7779f02c6213c58afc046f72cbb.image"
+uid="uid://b3xo174c4b1q5"
+path="res://.godot/imported/CheckOn.png-dca1e7779f02c6213c58afc046f72cbb.image"
 
 [deps]
 
 source_file="res://Assets/Style/CheckOn.png"
-dest_files=[ "res://.import/CheckOn.png-dca1e7779f02c6213c58afc046f72cbb.image" ]
+dest_files=["res://.godot/imported/CheckOn.png-dca1e7779f02c6213c58afc046f72cbb.image"]
 
 [params]
 

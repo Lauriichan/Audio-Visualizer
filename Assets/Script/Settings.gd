@@ -10,10 +10,10 @@ func get_default(path, default):
 		return default;
 	return data[path];
 	
-func get(path):
+func get_data(path):
 	return get_default(path, null);
 	
-func set(path, value):
+func set_data(path, value):
 	data[path] = value;
 
 func remove(path):

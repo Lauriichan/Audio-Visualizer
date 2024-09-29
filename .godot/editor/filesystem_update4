@@ -1,0 +1,8 @@
+res://default_bus_layout.tres
+res://default_env.tres
+res://Scene.tscn
+res://Assets/Style/Theme.tres
+res://Assets/Style/FontLight.tres
+res://Assets/Script/Root.gd
+res://Assets/Script/DragBar.gd
+res://Assets/Script/AudioSpectrum.gd

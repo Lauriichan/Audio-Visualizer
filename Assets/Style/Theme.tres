@@ -1,63 +1,68 @@
-[gd_resource type="Theme" load_steps=17 format=2]
+[gd_resource type="Theme" load_steps=17 format=3 uid="uid://druqko5jt7fu4"]
 
-[ext_resource path="res://Assets/Style/DefaultFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Assets/Style/FontLight.tres" type="DynamicFontData" id=2]
-[ext_resource path="res://Assets/Style/FlatAccent.tres" type="StyleBox" id=3]
-[ext_resource path="res://Assets/Style/FlatBackground.tres" type="StyleBox" id=4]
-[ext_resource path="res://Assets/Style/CheckOnTex.tres" type="Texture" id=5]
-[ext_resource path="res://Assets/Style/CheckOffTex.tres" type="Texture" id=6]
-[ext_resource path="res://Assets/Style/FlatBackgroundPopup.tres" type="StyleBox" id=7]
-[ext_resource path="res://Assets/Style/FlatForegroundPopup.tres" type="StyleBox" id=8]
-[ext_resource path="res://Assets/Style/FlatBackgroundHighlight.tres" type="StyleBox" id=9]
-[ext_resource path="res://Assets/Style/FlatEmpty.tres" type="StyleBox" id=10]
-[ext_resource path="res://Assets/Style/FlatBackgroundDownlight.tres" type="StyleBox" id=11]
-[ext_resource path="res://Assets/Style/SeperatorTex.tres" type="Texture" id=12]
-[ext_resource path="res://Assets/Style/FlatBarBackground.tres" type="StyleBox" id=13]
-[ext_resource path="res://Assets/Style/EditFont.tres" type="DynamicFont" id=14]
+[ext_resource type="FontFile" path="res://Assets/Style/DefaultFont.tres" id="1"]
+[ext_resource type="FontFile" path="res://Assets/Style/FontLight.tres" id="2"]
+[ext_resource type="StyleBox" path="res://Assets/Style/FlatAccent.tres" id="3"]
+[ext_resource type="StyleBox" path="res://Assets/Style/FlatBackground.tres" id="4"]
+[ext_resource type="Texture2D" path="res://Assets/Style/CheckOnTex.tres" id="5"]
+[ext_resource type="Texture2D" path="res://Assets/Style/CheckOffTex.tres" id="6"]
+[ext_resource type="StyleBox" path="res://Assets/Style/FlatBackgroundPopup.tres" id="7"]
+[ext_resource type="StyleBox" path="res://Assets/Style/FlatForegroundPopup.tres" id="8"]
+[ext_resource type="StyleBox" path="res://Assets/Style/FlatBackgroundHighlight.tres" id="9"]
+[ext_resource type="StyleBox" path="res://Assets/Style/FlatEmpty.tres" id="10"]
+[ext_resource type="StyleBox" path="res://Assets/Style/FlatBackgroundDownlight.tres" id="11"]
+[ext_resource type="Texture2D" path="res://Assets/Style/SeperatorTex.tres" id="12"]
+[ext_resource type="StyleBox" path="res://Assets/Style/FlatBarBackground.tres" id="13"]
+[ext_resource type="FontFile" path="res://Assets/Style/EditFont.tres" id="14"]
 
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 12 )
-region_rect = Rect2( 0, 0, 8, 2 )
+[sub_resource type="StyleBoxTexture" id="7"]
+texture = ExtResource("12")
+region_rect = Rect2(0, 0, 8, 2)
 
-[sub_resource type="DynamicFont" id=6]
-font_data = ExtResource( 2 )
+[sub_resource type="FontFile" id="6"]
+fallbacks = Array[Font]([ExtResource("2")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
 [resource]
-default_font = ExtResource( 1 )
-BetterProgressBar/styles/background = ExtResource( 13 )
-BetterProgressBar/styles/foreground = ExtResource( 3 )
-Button/styles/disabled = ExtResource( 10 )
-Button/styles/focus = ExtResource( 10 )
-Button/styles/hover = ExtResource( 9 )
-Button/styles/normal = ExtResource( 4 )
-Button/styles/pressed = ExtResource( 11 )
-CheckBox/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
-CheckBox/icons/checked = ExtResource( 5 )
-CheckBox/icons/unchecked = ExtResource( 6 )
-CheckBox/styles/disabled = ExtResource( 10 )
-CheckBox/styles/focus = ExtResource( 10 )
-CheckBox/styles/hover = ExtResource( 10 )
-CheckBox/styles/hover_pressed = ExtResource( 10 )
-CheckBox/styles/normal = ExtResource( 10 )
-CheckBox/styles/pressed = ExtResource( 10 )
+default_font = ExtResource("1")
+BetterProgressBar/styles/background = ExtResource("13")
+BetterProgressBar/styles/foreground = ExtResource("3")
+Button/styles/disabled = ExtResource("10")
+Button/styles/focus = ExtResource("10")
+Button/styles/hover = ExtResource("9")
+Button/styles/normal = ExtResource("4")
+Button/styles/pressed = ExtResource("11")
+CheckBox/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
+CheckBox/icons/checked = ExtResource("5")
+CheckBox/icons/unchecked = ExtResource("6")
+CheckBox/styles/disabled = ExtResource("10")
+CheckBox/styles/focus = ExtResource("10")
+CheckBox/styles/hover = ExtResource("10")
+CheckBox/styles/hover_pressed = ExtResource("10")
+CheckBox/styles/normal = ExtResource("10")
+CheckBox/styles/pressed = ExtResource("10")
 ColorPicker/constants/sv_height = 128
 ColorPicker/constants/sv_width = 256
-ColorPickerButton/styles/disabled = ExtResource( 10 )
-ColorPickerButton/styles/focus = ExtResource( 10 )
-ColorPickerButton/styles/hover = ExtResource( 10 )
-ColorPickerButton/styles/normal = ExtResource( 10 )
-ColorPickerButton/styles/pressed = ExtResource( 10 )
-HSeparator/styles/separator = SubResource( 7 )
-LineEdit/fonts/font = ExtResource( 14 )
-MenuButton/colors/font_color_hover = Color( 1, 1, 1, 1 )
-MenuButton/styles/focus = ExtResource( 10 )
-PopupMenu/fonts/font = SubResource( 6 )
-PopupMenu/icons/checked = ExtResource( 5 )
-PopupMenu/icons/unchecked = ExtResource( 6 )
-PopupMenu/styles/hover = ExtResource( 8 )
-PopupMenu/styles/panel = ExtResource( 7 )
-VScrollBar/styles/grabber = ExtResource( 3 )
-VScrollBar/styles/grabber_highlight = ExtResource( 3 )
-VScrollBar/styles/grabber_pressed = ExtResource( 3 )
-VScrollBar/styles/scroll = ExtResource( 4 )
-VScrollBar/styles/scroll_focus = ExtResource( 4 )
+ColorPickerButton/styles/disabled = ExtResource("10")
+ColorPickerButton/styles/focus = ExtResource("10")
+ColorPickerButton/styles/hover = ExtResource("10")
+ColorPickerButton/styles/normal = ExtResource("10")
+ColorPickerButton/styles/pressed = ExtResource("10")
+HSeparator/styles/separator = SubResource("7")
+LineEdit/fonts/font = ExtResource("14")
+MenuButton/colors/font_color_hover = Color(1, 1, 1, 1)
+MenuButton/styles/focus = ExtResource("10")
+PopupMenu/fonts/font = SubResource("6")
+PopupMenu/icons/checked = ExtResource("5")
+PopupMenu/icons/unchecked = ExtResource("6")
+PopupMenu/styles/hover = ExtResource("8")
+PopupMenu/styles/panel = ExtResource("7")
+VScrollBar/styles/grabber = ExtResource("3")
+VScrollBar/styles/grabber_highlight = ExtResource("3")
+VScrollBar/styles/grabber_pressed = ExtResource("3")
+VScrollBar/styles/scroll = ExtResource("4")
+VScrollBar/styles/scroll_focus = ExtResource("4")

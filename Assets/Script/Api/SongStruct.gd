@@ -1,6 +1,6 @@
 class_name Song
 
-var image_loader : FuncRef;
+var image_loader : Callable;
 var image_data : String = "";
 
 var title : String = "Unknown Title";

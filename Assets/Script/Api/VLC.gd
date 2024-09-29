@@ -10,16 +10,14 @@ var run : bool = false;
 var host : String;
 var port : int;
 
-var ref : FuncRef;
+var ref : Callable;
 
 var result = null;
 
 var current_song : Song;
 
 func _ready():
-	ref = FuncRef.new();
-	ref.function = "_load_image";
-	ref.set_instance(self);
+	ref = Callable(self, "_load_image");
 
 func _update() -> Song:
 	return current_song;
@@ -50,9 +48,9 @@ func read_next(parser, song, key):
 		"artwork_url":
 			var data : String = parser.get_node_data();
 			data.erase(0, 8);
-			song.image_data = data.http_unescape();
+			song.image_data = data.uri_decode();
 		"filename":
-			if song.title.empty() or song.title == "Unknown Title":
+			if song.title.is_empty() or song.title == "Unknown Title":
 				var data = parser.get_node_data();
 				song.title = data;
 				if data.find(".") != -1:
@@ -80,7 +78,7 @@ func load_until_node(parser, song, key):
 			read_next(parser, song, current_key);
 
 func _load_image(data):
-	if data == null or data.empty():
+	if data == null or data.is_empty():
 		return null;
 	var image = Image.new();
 	var error = image.load(data);
@@ -105,7 +103,7 @@ func _read_update():
 				current_song = null;
 				continue;
 			current_song = null;
-			_ignore = request.connect_to_host(host, port, false, true);
+			_ignore = request.connect_to_host(host, port);
 			continue;
 		var headers = [
 			"Authorization: Basic " + auth
@@ -144,7 +142,7 @@ func _on_enable():
 		request = HTTPClient.new();
 	thread = Thread.new();
 	run = true;
-	var _ignore = thread.start(self, "_read_update");
+	var _ignore = thread.start(Callable(self, "_read_update"));
 	
 func _on_disable():
 	run = false;

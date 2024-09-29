@@ -2,12 +2,13 @@
 
 importer="image"
 type="Image"
-path="res://.import/CheckOff.png-3046b0ca5e705440c339036f1f51af27.image"
+uid="uid://c4hoa26ujt5xf"
+path="res://.godot/imported/CheckOff.png-3046b0ca5e705440c339036f1f51af27.image"
 
 [deps]
 
 source_file="res://Assets/Style/CheckOff.png"
-dest_files=[ "res://.import/CheckOff.png-3046b0ca5e705440c339036f1f51af27.image" ]
+dest_files=["res://.godot/imported/CheckOff.png-3046b0ca5e705440c339036f1f51af27.image"]
 
 [params]
 

@@ -2,8 +2,8 @@ extends Control
 
 signal update_settings
 
-export(String) var path = "user://settings.json";
-export(Dictionary) var defaults = {};
+@export var path: String = "user://settings.json";
+@export var defaults: Dictionary = {};
 
 
 func _ready():
@@ -14,23 +14,24 @@ func _ready():
 	_setup_picker($ScrollContainer/VBoxContainer/BarBorderColor);
 
 func _setup_picker(node : ColorPickerButton):
-	node.get_picker().rect_scale = Vector2(1, 0.8);
-	node.get_popup().rect_min_size = node.get_picker().rect_size * node.get_picker().rect_scale;
-	node.get_popup().rect_size = node.get_popup().rect_min_size;
+	node.get_picker().scale = Vector2(1, 0.8);
+	node.get_popup().min_size = node.get_picker().size * node.get_picker().scale;
+	node.get_popup().size = node.get_popup().min_size;
 
 func get_data_path() -> String:
 	return path.replace("user://", OS.get_user_data_dir() + '/');
 
 func _load_data():
 	Settings.clear();
-	var file = File.new();
-	if not file.file_exists(path):
+	if not FileAccess.file_exists(path):
 		_setup_data();
 		return;
-	file.open(path, File.READ);
+	var file = FileAccess.open(path, FileAccess.READ);
 	var content = file.get_as_text();
 	file.close();
-	var parseResult = JSON.parse(content);
+	var json = JSON.new()
+	json.parse(content);
+	var parseResult = json.get_data()
 	if parseResult.error_line == -1:
 		_setup_data();
 		return;
@@ -88,9 +89,8 @@ func _save_data():
 			dict[key] = Color(value).to_html(false);
 			continue;
 		dict[key] = value;
-	var file = File.new();
-	file.open(path, File.WRITE);
-	file.store_string(JSON.print(dict));
+	var file = FileAccess.open(path, FileAccess.WRITE);
+	file.store_string(JSON.stringify(dict));
 	file.flush();
 	file.close();
 	

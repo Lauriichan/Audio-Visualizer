@@ -2,12 +2,13 @@
 
 importer="image"
 type="Image"
-path="res://.import/Seperator.png-cfc1238abca5d01833c2f361db9a75df.image"
+uid="uid://bmexogv3ryv6i"
+path="res://.godot/imported/Seperator.png-cfc1238abca5d01833c2f361db9a75df.image"
 
 [deps]
 
 source_file="res://Assets/Style/Seperator.png"
-dest_files=[ "res://.import/Seperator.png-cfc1238abca5d01833c2f361db9a75df.image" ]
+dest_files=["res://.godot/imported/Seperator.png-cfc1238abca5d01833c2f361db9a75df.image"]
 
 [params]
 

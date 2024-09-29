@@ -1,38 +1,38 @@
-tool
+@tool
 extends Control
 class_name AudioSpectrum
 
 enum SmoothMethod { NONE, LINEAR }
-enum FFTSize { FFT_256, FFT_512, FFT_1024, FFT_2048, FFT_4096}
+enum FFTSize { FFT_256, FFT_512, FFT_1024, FFT_2048, FFT_4096 }
 
-export(float, 0, 48000) var MinimumFrequency = 100.0;
-export(float, 0, 96000) var MaximumFrequency = 11050.0;
+@export var MinimumFrequency = 100.0; # (float, 0, 48000)
+@export var MaximumFrequency = 11050.0; # (float, 0, 96000)
 
-export(float, 1, 200) var LegacyDivider = 40.0;
-export(float, 1, 10) var LegacyMultiplier = 1.2;
-export(float, 0, 100) var SmoothSpeed = 2.4;
+@export var LegacyDivider = 40.0; # (float, 1, 200)
+@export var LegacyMultiplier = 1.2; # (float, 1, 10)
+@export var SmoothSpeed = 2.4; # (float, 0, 100)
 
-export(bool) var Smoothing = false;
-export(float, 0, 1) var SmoothingScale = 0.60;
-export(bool) var Decibil = false setget _set_decibil;
+@export var Smoothing: bool = false;
+@export var SmoothingScale = 0.60; # (float, 0, 1)
+@export var Decibil: bool = false: set = _set_decibil
 
-export(int, 0, 2048) var Amount = 16 setget _set_amount;
-export(SmoothMethod) var SmoothType = SmoothMethod.LINEAR;
-export(FFTSize) var FFTSizeType = FFTSize.FFT_2048;
-export(float, 1, 30) var FFTBufferSize = 3.0;
+@export var Amount = 16: set = _set_amount
+@export var SmoothType: SmoothMethod = SmoothMethod.LINEAR;
+@export var FFTSizeType: FFTSize = FFTSize.FFT_2048;
+@export var FFTBufferSize = 3.0; # (float, 1, 30)
 
-export(float) var MinimumHeight = 2.0 setget _set_bar_height;
-export(float) var BarWidth = 20.0 setget _set_bar_width;
+@export var MinimumHeight: float = 2.0: set = _set_bar_height
+@export var BarWidth: float = 20.0: set = _set_bar_width
 
-export(Color) var BarColor = Color("#b71f78") setget _set_color;
+@export var BarColor: Color = Color("#b71f78"): set = _set_color
 
-export(int) var targetFps = 30 setget _set_target_fps;
-export(int) var targetUps = 90 setget _set_target_ups;
+@export var targetFps: int = 30: set = _set_target_fps
+@export var targetUps: int = 90: set = _set_target_ups
 
-export(bool) var legacy = false;
+@export var legacy: bool = false;
 
-export(bool) var debug = false setget _set_debug;
-export(String) var debug_path = "/root/Root/Debug" setget _set_debug_path;
+@export var debug: bool = false: set = _set_debug
+@export var debug_path: String = "/root/Root/Debug": set = _set_debug_path
 
 var reset = true;
 var min_mag = 0;
@@ -47,17 +47,17 @@ var bars = [];
 
 var spectrum : AudioEffectSpectrumAnalyzerInstance;
 
-func _set_decibil(var value):
+func _set_decibil(value):
 	Decibil = value;
 	reset = true;
 
-func _set_debug(var value):
+func _set_debug(value):
 	debug = value;
 	if(!value):
 		return;
 	_find_labels();
 
-func _set_debug_path(var value):
+func _set_debug_path(value):
 	debug_path = value;
 	if(!debug):
 		return;
@@ -72,28 +72,28 @@ func _find_labels():
 	max_label = node.get_node_or_null("Container/Max");
 	bar_label = node.get_node_or_null("Container/Bar");
 
-func _set_color(var value):
+func _set_color(value):
 	BarColor = value;
 
-func _set_bar_width(var value):
+func _set_bar_width(value):
 	BarWidth = value;
 	_update_bars();
 
-func _set_bar_height(var value):
+func _set_bar_height(value):
 	MinimumHeight = value;
 	_update_bars();
 
-func _set_amount(var value):
+func _set_amount(value):
 	Amount = value;
 	_update_bars();
 
-func _set_target_fps(var value):
+func _set_target_fps(value):
 	targetFps = value;
-	Engine.set_target_fps(value);
+	Engine.set_max_fps(value);
 
-func _set_target_ups(var value):
+func _set_target_ups(value):
 	targetUps = value;
-	Engine.set_iterations_per_second(value);
+	Engine.set_physics_ticks_per_second(value);
 	
 func _reset_magnitude():
 	min_mag = 0;
@@ -101,11 +101,11 @@ func _reset_magnitude():
 
 func _update_bars():
 	bars.resize(Amount);
-	var space = (rect_size.x - (Amount * BarWidth)) / (Amount - 1);
+	var space = (size.x - (Amount * BarWidth)) / (Amount - 1);
 	var width = BarWidth;
 	var height = 0;
-	if Engine.editor_hint:
-		height = rect_size.y;
+	if Engine.is_editor_hint():
+		height = size.y;
 	for i in range(Amount):
 		bars[i] = {
 			"x": i * (width + space),
@@ -116,39 +116,39 @@ func _update_bars():
 
 func _ready():
 	_update_bars();
-	Engine.set_target_fps(targetFps);
-	Engine.set_iterations_per_second(targetUps);
+	Engine.set_max_fps(targetFps);
+	Engine.set_physics_ticks_per_second(targetUps);
 
 func _draw():
 	var barx = bars.duplicate();
 	for i in range(Amount):
 		var bar = barx[i];
 		var height = MinimumHeight + bar["h"];
-		draw_rect(Rect2(bar["x"], rect_size.y - height, bar["w"], height), BarColor);
+		draw_rect(Rect2(bar["x"], size.y - height, bar["w"], height), BarColor);
 		
 func legacy_update_spectrum(delta):
 	var _spec = get_spectrum();
 	if !_spec:
 		return;
-	var nodeHeight = rect_size.y - MinimumHeight;
+	var nodeHeight = size.y - MinimumHeight;
 	var prev_hz = MinimumFrequency;
 	var freq = MaximumFrequency - MinimumFrequency;
 	for i in range(1, Amount+1):
 		var hz = (i * freq / Amount) + MinimumFrequency;
 		var magnitude: float = _spec.get_magnitude_for_frequency_range(prev_hz, hz).length();
-		var energy = clamp((LegacyMultiplier * LegacyDivider + linear2db(magnitude)) / LegacyDivider, 0, 1);
+		var energy = clamp((LegacyMultiplier * LegacyDivider + linear_to_db(magnitude)) / LegacyDivider, 0, 1);
 		bars[i - 1]["h"] = smooth(bars[i - 1]["h"], (energy * nodeHeight), delta * SmoothSpeed);
 		bars[i - 1]["m"] = magnitude;
 		prev_hz = hz;
 
-func smooth(var prev_height, var height, var delta):
+func smooth(prev_height, height, delta):
 	if prev_height == null:
 		prev_height = 0;
 	match (SmoothType):
 		SmoothMethod.NONE:
 			return height;
 		SmoothMethod.LINEAR:
-			return lerp(prev_height, height, delta);
+			return lerp(int(prev_height), height, delta);
 
 func update_spectrum(_delta):
 	var _spec = get_spectrum();
@@ -159,7 +159,7 @@ func update_spectrum(_delta):
 		min_mag = 0;
 		max_mag = 0;
 		reset = false;
-	var nodeHeight = rect_size.y - MinimumHeight;
+	var nodeHeight = size.y - MinimumHeight;
 	var prev_hz = MinimumFrequency;
 	var freq = MaximumFrequency - MinimumFrequency;
 	if is_inf(min_mag):
@@ -173,7 +173,7 @@ func update_spectrum(_delta):
 		if(tmp_reset):
 			bars[i - 1]["m"] = 0;
 		if (Decibil):
-			magnitude = linear2db(magnitude);
+			magnitude = linear_to_db(magnitude);
 		if (Smoothing):
 			magnitude = SmoothingScale * bars[i - 1]["m"] + ((1 - SmoothingScale) * magnitude);
 		if is_inf(magnitude):
@@ -219,13 +219,22 @@ func get_spectrum():
 		return spectrum;
 	var effect : AudioEffectSpectrumAnalyzer = AudioServer.get_bus_effect(0, 0);
 	effect.set_buffer_length(FFTBufferSize);
-	effect.set_fft_size(FFTSizeType);
+	match(FFTSizeType):
+		FFTSize.FFT_256:
+			effect.set_fft_size(AudioEffectSpectrumAnalyzer.FFT_SIZE_256);
+		FFTSize.FFT_512:
+			effect.set_fft_size(AudioEffectSpectrumAnalyzer.FFT_SIZE_512);
+		FFTSize.FFT_1024:
+			effect.set_fft_size(AudioEffectSpectrumAnalyzer.FFT_SIZE_1024);
+		FFTSize.FFT_2048:
+			effect.set_fft_size(AudioEffectSpectrumAnalyzer.FFT_SIZE_2048);
+		FFTSize.FFT_4096:
+			effect.set_fft_size(AudioEffectSpectrumAnalyzer.FFT_SIZE_4096);
 	spectrum = AudioServer.get_bus_effect_instance(0, 0);
 	return spectrum;
 
 func _process(_delta):
-	update();
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		_set_amount(Amount);
 
 func _physics_process(delta):

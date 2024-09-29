@@ -5,7 +5,8 @@ var dragging = false;
 var last = 0;
 var count = 0;
 
-onready var api = get_node("/root/Root/Api");
+@onready var api = get_node("/root/Root/Api");
+@onready var window = get_window();
 
 func _physics_process(delta):
 	if last > 0:
@@ -18,7 +19,7 @@ func _input(_event):
 		_motion(_event);
 
 func _button(_event : InputEventMouseButton):
-	if _event.button_index == BUTTON_LEFT:
+	if _event.button_index == MOUSE_BUTTON_LEFT:
 		if _event.pressed and _is_inside():
 			if last > 0:
 				fullscreen();
@@ -34,19 +35,18 @@ func _button(_event : InputEventMouseButton):
 			return;
 			
 func fullscreen():
-	OS.window_fullscreen = !OS.window_fullscreen;
+	window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN if window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN else Window.MODE_WINDOWED;
 	var _ignore;
-	
 	api._stop();
-	if OS.window_fullscreen:
-		_ignore = get_tree().change_scene("res://Fullscreen.tscn");
+	if window.mode == Window.MODE_EXCLUSIVE_FULLSCREEN:
+		_ignore = get_tree().change_scene_to_file("res://Fullscreen.tscn");
 	else:
-		_ignore = get_tree().change_scene("res://Scene.tscn");
+		_ignore = get_tree().change_scene_to_file("res://Scene.tscn");
 
 func _motion(_event : InputEventMouseMotion):
 	if dragging:
-		OS.window_position = (OS.window_position - prevPoint) + get_global_mouse_position();
+		window.position = (window.position - prevPoint) + get_global_mouse_position();
 
 func _is_inside() -> bool: 
-	var position = get_local_mouse_position();
-	return position.x >= rect_position.x && position.x <= rect_position.x + rect_size.x && position.y >= rect_position.y && position.y <= rect_position.y + rect_size.y;
+	var pos = get_local_mouse_position();
+	return pos.x >= position.x && pos.x <= position.x + size.x && pos.y >= position.y && pos.y <= position.y + size.y;

@@ -2,12 +2,13 @@
 
 importer="image"
 type="Image"
-path="res://.import/boot.png-0853cbca0c90c11787730c34e1b0063a.image"
+uid="uid://bc40g180voomb"
+path="res://.godot/imported/boot.png-0853cbca0c90c11787730c34e1b0063a.image"
 
 [deps]
 
 source_file="res://boot.png"
-dest_files=[ "res://.import/boot.png-0853cbca0c90c11787730c34e1b0063a.image" ]
+dest_files=["res://.godot/imported/boot.png-0853cbca0c90c11787730c34e1b0063a.image"]
 
 [params]
 

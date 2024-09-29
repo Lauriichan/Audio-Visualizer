@@ -11,7 +11,7 @@ func _physics_process(delta):
 	_update_device();
 
 func _update_device():
-	var devices = AudioServer.capture_get_device_list();
+	var devices = AudioServer.get_input_device_list();
 	for device in devices:
 		if itemList.has(device):
 			continue;

@@ -3,8 +3,8 @@ class_name API
 
 var boot_icon : Image = load("boot.png");
 
-export(Array, float) var refresh_rates;
-export(Array, String) var api_names;
+@export var refresh_rates : Array[float];
+@export var api_names : Array[String];
 
 var selected : String = "";
 var refresh_rate : float;
@@ -33,7 +33,7 @@ func _ready():
 	ui_icon = body.get_node("TextureRect");
 	ui_title = body.get_node("VBoxContainer/Title");
 	ui_artist = body.get_node("VBoxContainer/Artist");
-	var _ignore = get_node("..").connect("root_ready", self, "_root_ready");
+	var _ignore = get_node("..").connect("root_ready", Callable(self, "_root_ready"));
 	ui_bar.smoothing = true;
 	ui_bar.target = 0;
 	
@@ -56,7 +56,7 @@ func _stop():
 	if not started:
 		return;
 	started = false;
-	if not selected.empty():
+	if not selected.is_empty():
 		get_node(selected).disable();
 
 func _update_api():
@@ -69,7 +69,7 @@ func _update_api():
 	if selected == updated:
 		get_node(selected)._update_api();
 		return;
-	if not selected.empty():
+	if not selected.is_empty():
 		get_node(selected).disable();
 	var node = get_node(updated);
 	if not node:
@@ -100,16 +100,16 @@ func _update_audio():
 	if !ui_spectrum.legacy:
 		ui_spectrum.reset = true;
 	var device = Settings.get_default("DataAudio", "Default");
-	if AudioServer.capture_get_device() == device:
+	if AudioServer.get_input_device() == device:
 		return;
-	AudioServer.capture_set_device(device);
+	AudioServer.set_input_device(device);
 	
 func _physics_process(delta):
 	time += delta;
 	if time < refresh_rate:
 		return;
 	time -= refresh_rate;
-	if selected.empty():
+	if selected.is_empty():
 		return;
 	var song = get_node(selected)._update();
 	if reset_spectrum == 0:
@@ -150,8 +150,7 @@ func _update_interface(song):
 			_dump_to_file();
 			
 func _dump_to_file():
-	var file = File.new();
-	file.open("song.txt", File.WRITE);
+	var file = FileAccess.open("song.txt", FileAccess.WRITE);
 	file.store_string(dump_format.replace("$artist", previous.artist).replace("$title", previous.title))
 	file.flush();
 	file.close();

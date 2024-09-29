@@ -1,23 +1,21 @@
 extends BaseApi
 class_name StreamCompanion
 
-var server : TCP_Server;
+var server : TCPServer;
 var client : StreamPeerTCP;
 var port : int = 7840;
 var thread : Thread;
 
 var run : bool = false;
 
-var ref : FuncRef;
+var ref : Callable;
 var songData : String;
 
 func _ready():
-	ref = FuncRef.new();
-	ref.function = "_load_image";
-	ref.set_instance(self);
+	ref = Callable(self, "_load_image");
 	
 func _update() -> Song:
-	if songData == null or songData.empty():
+	if songData == null or songData.is_empty():
 		return null;
 	var song = Song.new();
 	song.image_loader = ref;
@@ -41,16 +39,18 @@ func _read_update():
 		_save_song(data);
 		OS.delay_msec(100);
 		
-func _save_song(var data : String):
+func _save_song(data : String):
 	var idx = data.find("{");
 	if idx == -1:
 		return;
-	var dictionary = JSON.parse(data.substr(idx, data.find("}", idx + 1) - 1)).result;
+	var json = JSON.new()
+	json.parse(data.substr(idx, data.find("}", idx + 1) - 1));
+	var dictionary = json.get_data()
 	if "visualizer" in dictionary:
 		songData = dictionary["visualizer"];
 
 func _load_image(_data):
-	if _data == null or _data.empty():
+	if _data == null or _data.is_empty():
 		return null;
 	var image = Image.new();
 	var error = image.load(_data);
@@ -64,11 +64,11 @@ func _update_api():
 	enable();
 	
 func _on_enable():
-	server = TCP_Server.new();
+	server = TCPServer.new();
 	var _ignore = server.listen(port, "127.0.0.1");
 	thread = Thread.new();
 	run = true;
-	_ignore = thread.start(self, "_read_update");
+	_ignore = thread.start(Callable(self, "_read_update"));
 	
 func _on_disable():
 	run = false;
